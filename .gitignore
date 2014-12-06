@@ -1,0 +1,12 @@
+#user
+sph-fluid.xcodeproj/project.xcworkspace/xcuserdata/
+sph-fluid.xcodeproj/xcuserdata/
+
+#product
+core/sph_fluid.1
+
+#build
+DerivedData/
+
+#linked
+*.o

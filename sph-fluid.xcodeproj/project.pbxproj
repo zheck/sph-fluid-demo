@@ -1,0 +1,261 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		487A89CA1A3302E600B76BA9 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487A89C91A3302E600B76BA9 /* GLUT.framework */; };
+		487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487A89CB1A3302EE00B76BA9 /* OpenGL.framework */; };
+		487A89D51A330C5100B76BA9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 487A89CF1A330C5100B76BA9 /* main.cpp */; };
+		487A89D61A330C5100B76BA9 /* SphFluidDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 487A89D31A330C5100B76BA9 /* SphFluidDemo.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		487A89B81A32CA8500B76BA9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		487A89BA1A32CA8500B76BA9 /* sph-fluid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "sph-fluid"; path = "/Users/zheck/projects/sph-fluid/sph-fluid/build/Debug/sph-fluid"; sourceTree = "<absolute>"; };
+		487A89C91A3302E600B76BA9 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		487A89CB1A3302EE00B76BA9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		487A89CF1A330C5100B76BA9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		487A89D21A330C5100B76BA9 /* sph_fluid.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = sph_fluid.1; sourceTree = "<group>"; };
+		487A89D31A330C5100B76BA9 /* SphFluidDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphFluidDemo.cpp; sourceTree = "<group>"; };
+		487A89D41A330C5100B76BA9 /* SphFluidDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphFluidDemo.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		487A89B71A32CA8500B76BA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */,
+				487A89CA1A3302E600B76BA9 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		487A89B11A32CA8500B76BA9 = {
+			isa = PBXGroup;
+			children = (
+				487A89CD1A330C5100B76BA9 /* src */,
+				487A89CB1A3302EE00B76BA9 /* OpenGL.framework */,
+				487A89C91A3302E600B76BA9 /* GLUT.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		487A89CD1A330C5100B76BA9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				487A89CE1A330C5100B76BA9 /* core */,
+				487A89CF1A330C5100B76BA9 /* main.cpp */,
+				487A89D01A330C5100B76BA9 /* maths */,
+				487A89D11A330C5100B76BA9 /* render */,
+				487A89D21A330C5100B76BA9 /* sph_fluid.1 */,
+				487A89D31A330C5100B76BA9 /* SphFluidDemo.cpp */,
+				487A89D41A330C5100B76BA9 /* SphFluidDemo.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		487A89CE1A330C5100B76BA9 /* core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		487A89D01A330C5100B76BA9 /* maths */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = maths;
+			sourceTree = "<group>";
+		};
+		487A89D11A330C5100B76BA9 /* render */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		487A89B91A32CA8500B76BA9 /* sph-fluid */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 487A89C31A32CA8500B76BA9 /* Build configuration list for PBXNativeTarget "sph-fluid" */;
+			buildPhases = (
+				487A89B61A32CA8500B76BA9 /* Sources */,
+				487A89B71A32CA8500B76BA9 /* Frameworks */,
+				487A89B81A32CA8500B76BA9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "sph-fluid";
+			productName = "sph-fluid";
+			productReference = 487A89BA1A32CA8500B76BA9 /* sph-fluid */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		487A89B21A32CA8500B76BA9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+			};
+			buildConfigurationList = 487A89B51A32CA8500B76BA9 /* Build configuration list for PBXProject "sph-fluid" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 487A89B11A32CA8500B76BA9;
+			productRefGroup = 487A89B11A32CA8500B76BA9;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				487A89B91A32CA8500B76BA9 /* sph-fluid */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		487A89B61A32CA8500B76BA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				487A89D51A330C5100B76BA9 /* main.cpp in Sources */,
+				487A89D61A330C5100B76BA9 /* SphFluidDemo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		487A89C11A32CA8500B76BA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		487A89C21A32CA8500B76BA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		487A89C41A32CA8500B76BA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		487A89C51A32CA8500B76BA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		487A89B51A32CA8500B76BA9 /* Build configuration list for PBXProject "sph-fluid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				487A89C11A32CA8500B76BA9 /* Debug */,
+				487A89C21A32CA8500B76BA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		487A89C31A32CA8500B76BA9 /* Build configuration list for PBXNativeTarget "sph-fluid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				487A89C41A32CA8500B76BA9 /* Debug */,
+				487A89C51A32CA8500B76BA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 487A89B21A32CA8500B76BA9 /* Project object */;
+}

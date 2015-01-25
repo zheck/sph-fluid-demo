@@ -1,5 +1,6 @@
 #user
 sph-fluid.xcodeproj/project.xcworkspace/xcuserdata/
+sph-fluid.xcodeproj/project.xcworkspace/xcshareddata/
 sph-fluid.xcodeproj/xcuserdata/
 
 #product
@@ -10,3 +11,6 @@ DerivedData/
 
 #linked
 *.o
+
+#temporary
+*.~

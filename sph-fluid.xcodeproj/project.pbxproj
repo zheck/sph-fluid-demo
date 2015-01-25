@@ -7,10 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		487A89CA1A3302E600B76BA9 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487A89C91A3302E600B76BA9 /* GLUT.framework */; };
 		487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487A89CB1A3302EE00B76BA9 /* OpenGL.framework */; };
-		487A89D51A330C5100B76BA9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 487A89CF1A330C5100B76BA9 /* main.cpp */; };
-		487A89D61A330C5100B76BA9 /* SphFluidDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 487A89D31A330C5100B76BA9 /* SphFluidDemo.cpp */; };
+		4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE431A86D47B0079DF2C /* Camera.cpp */; };
+		4893AE641A86D47B0079DF2C /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE451A86D47B0079DF2C /* Keyboard.cpp */; };
+		4893AE651A86D47B0079DF2C /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE471A86D47B0079DF2C /* Mouse.cpp */; };
+		4893AE661A86D47B0079DF2C /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE4B1A86D47B0079DF2C /* Grid.cpp */; };
+		4893AE671A86D47B0079DF2C /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE4D1A86D47B0079DF2C /* Wall.cpp */; };
+		4893AE681A86D47B0079DF2C /* FluidBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE4F1A86D47B0079DF2C /* FluidBody.cpp */; };
+		4893AE691A86D47B0079DF2C /* Vect3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE521A86D47B0079DF2C /* Vect3f.cpp */; };
+		4893AE6A1A86D47B0079DF2C /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE541A86D47B0079DF2C /* Particle.cpp */; };
+		4893AE6B1A86D47B0079DF2C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE571A86D47B0079DF2C /* main.cpp */; };
+		4893AE6C1A86D47B0079DF2C /* DebugRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE591A86D47B0079DF2C /* DebugRender.cpp */; };
+		4893AE6D1A86D47B0079DF2C /* GridRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5B1A86D47B0079DF2C /* GridRender.cpp */; };
+		4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */; };
+		4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */; };
+		4893AE701A86D47B0079DF2C /* SphFluidDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE611A86D47B0079DF2C /* SphFluidDemo.cpp */; };
+		489A61321A331897008FA731 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489A61311A331897008FA731 /* GLUT.framework */; };
+		48A38F071A7AD6CC00AA6D07 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A38F061A7AD6CC00AA6D07 /* boost.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,13 +39,39 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		487A89BA1A32CA8500B76BA9 /* sph-fluid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "sph-fluid"; path = "/Users/zheck/projects/sph-fluid/sph-fluid/build/Debug/sph-fluid"; sourceTree = "<absolute>"; };
-		487A89C91A3302E600B76BA9 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		487A89CB1A3302EE00B76BA9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		487A89CF1A330C5100B76BA9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		487A89D21A330C5100B76BA9 /* sph_fluid.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = sph_fluid.1; sourceTree = "<group>"; };
-		487A89D31A330C5100B76BA9 /* SphFluidDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphFluidDemo.cpp; sourceTree = "<group>"; };
-		487A89D41A330C5100B76BA9 /* SphFluidDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphFluidDemo.h; sourceTree = "<group>"; };
+		4893AE411A86D47B0079DF2C /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		4893AE431A86D47B0079DF2C /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		4893AE441A86D47B0079DF2C /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		4893AE451A86D47B0079DF2C /* Keyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Keyboard.cpp; sourceTree = "<group>"; };
+		4893AE461A86D47B0079DF2C /* Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyboard.h; sourceTree = "<group>"; };
+		4893AE471A86D47B0079DF2C /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mouse.cpp; sourceTree = "<group>"; };
+		4893AE481A86D47B0079DF2C /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
+		4893AE4B1A86D47B0079DF2C /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
+		4893AE4C1A86D47B0079DF2C /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		4893AE4D1A86D47B0079DF2C /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
+		4893AE4E1A86D47B0079DF2C /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
+		4893AE4F1A86D47B0079DF2C /* FluidBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FluidBody.cpp; sourceTree = "<group>"; };
+		4893AE501A86D47B0079DF2C /* FluidBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FluidBody.h; sourceTree = "<group>"; };
+		4893AE521A86D47B0079DF2C /* Vect3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vect3f.cpp; sourceTree = "<group>"; };
+		4893AE531A86D47B0079DF2C /* Vect3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vect3f.h; sourceTree = "<group>"; };
+		4893AE541A86D47B0079DF2C /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		4893AE551A86D47B0079DF2C /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		4893AE561A86D47B0079DF2C /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		4893AE571A86D47B0079DF2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4893AE591A86D47B0079DF2C /* DebugRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebugRender.cpp; sourceTree = "<group>"; };
+		4893AE5A1A86D47B0079DF2C /* DebugRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugRender.h; sourceTree = "<group>"; };
+		4893AE5B1A86D47B0079DF2C /* GridRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridRender.cpp; sourceTree = "<group>"; };
+		4893AE5C1A86D47B0079DF2C /* GridRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridRender.h; sourceTree = "<group>"; };
+		4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleRender.cpp; sourceTree = "<group>"; };
+		4893AE5E1A86D47B0079DF2C /* ParticleRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleRender.h; sourceTree = "<group>"; };
+		4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphDemoRender.cpp; sourceTree = "<group>"; };
+		4893AE601A86D47B0079DF2C /* SphDemoRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphDemoRender.h; sourceTree = "<group>"; };
+		4893AE611A86D47B0079DF2C /* SphFluidDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphFluidDemo.cpp; sourceTree = "<group>"; };
+		4893AE621A86D47B0079DF2C /* SphFluidDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphFluidDemo.h; sourceTree = "<group>"; };
+		489A61311A331897008FA731 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		489FFAB21A6F0C2C001BEB53 /* sph-fluid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "sph-fluid"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48A38F061A7AD6CC00AA6D07 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = /Library/Frameworks/boost.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,8 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48A38F071A7AD6CC00AA6D07 /* boost.framework in Frameworks */,
+				489A61321A331897008FA731 /* GLUT.framework in Frameworks */,
 				487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */,
-				487A89CA1A3302E600B76BA9 /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,45 +91,96 @@
 		487A89B11A32CA8500B76BA9 = {
 			isa = PBXGroup;
 			children = (
-				487A89CD1A330C5100B76BA9 /* src */,
-				487A89CB1A3302EE00B76BA9 /* OpenGL.framework */,
-				487A89C91A3302E600B76BA9 /* GLUT.framework */,
+				4893AE711A86D49D0079DF2C /* frameworks */,
+				4893AE401A86D47B0079DF2C /* src */,
+				489FFAB21A6F0C2C001BEB53 /* sph-fluid */,
 			);
 			sourceTree = "<group>";
 		};
-		487A89CD1A330C5100B76BA9 /* src */ = {
+		4893AE401A86D47B0079DF2C /* src */ = {
 			isa = PBXGroup;
 			children = (
-				487A89CE1A330C5100B76BA9 /* core */,
-				487A89CF1A330C5100B76BA9 /* main.cpp */,
-				487A89D01A330C5100B76BA9 /* maths */,
-				487A89D11A330C5100B76BA9 /* render */,
-				487A89D21A330C5100B76BA9 /* sph_fluid.1 */,
-				487A89D31A330C5100B76BA9 /* SphFluidDemo.cpp */,
-				487A89D41A330C5100B76BA9 /* SphFluidDemo.h */,
+				4893AE571A86D47B0079DF2C /* main.cpp */,
+				4893AE411A86D47B0079DF2C /* config.h */,
+				4893AE611A86D47B0079DF2C /* SphFluidDemo.cpp */,
+				4893AE621A86D47B0079DF2C /* SphFluidDemo.h */,
+				4893AE421A86D47B0079DF2C /* controllers */,
+				4893AE491A86D47B0079DF2C /* core */,
+				4893AE581A86D47B0079DF2C /* render */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		487A89CE1A330C5100B76BA9 /* core */ = {
+		4893AE421A86D47B0079DF2C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4893AE431A86D47B0079DF2C /* Camera.cpp */,
+				4893AE441A86D47B0079DF2C /* Camera.h */,
+				4893AE451A86D47B0079DF2C /* Keyboard.cpp */,
+				4893AE461A86D47B0079DF2C /* Keyboard.h */,
+				4893AE471A86D47B0079DF2C /* Mouse.cpp */,
+				4893AE481A86D47B0079DF2C /* Mouse.h */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		4893AE491A86D47B0079DF2C /* core */ = {
+			isa = PBXGroup;
+			children = (
+				4893AE4A1A86D47B0079DF2C /* containers */,
+				4893AE511A86D47B0079DF2C /* maths */,
+				4893AE4F1A86D47B0079DF2C /* FluidBody.cpp */,
+				4893AE501A86D47B0079DF2C /* FluidBody.h */,
+				4893AE541A86D47B0079DF2C /* Particle.cpp */,
+				4893AE551A86D47B0079DF2C /* Particle.h */,
+				4893AE561A86D47B0079DF2C /* Singleton.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		487A89D01A330C5100B76BA9 /* maths */ = {
+		4893AE4A1A86D47B0079DF2C /* containers */ = {
 			isa = PBXGroup;
 			children = (
+				4893AE4B1A86D47B0079DF2C /* Grid.cpp */,
+				4893AE4C1A86D47B0079DF2C /* Grid.h */,
+				4893AE4D1A86D47B0079DF2C /* Wall.cpp */,
+				4893AE4E1A86D47B0079DF2C /* Wall.h */,
+			);
+			path = containers;
+			sourceTree = "<group>";
+		};
+		4893AE511A86D47B0079DF2C /* maths */ = {
+			isa = PBXGroup;
+			children = (
+				4893AE521A86D47B0079DF2C /* Vect3f.cpp */,
+				4893AE531A86D47B0079DF2C /* Vect3f.h */,
 			);
 			path = maths;
 			sourceTree = "<group>";
 		};
-		487A89D11A330C5100B76BA9 /* render */ = {
+		4893AE581A86D47B0079DF2C /* render */ = {
 			isa = PBXGroup;
 			children = (
+				4893AE591A86D47B0079DF2C /* DebugRender.cpp */,
+				4893AE5A1A86D47B0079DF2C /* DebugRender.h */,
+				4893AE5B1A86D47B0079DF2C /* GridRender.cpp */,
+				4893AE5C1A86D47B0079DF2C /* GridRender.h */,
+				4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */,
+				4893AE5E1A86D47B0079DF2C /* ParticleRender.h */,
+				4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */,
+				4893AE601A86D47B0079DF2C /* SphDemoRender.h */,
 			);
 			path = render;
+			sourceTree = "<group>";
+		};
+		4893AE711A86D49D0079DF2C /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				489A61311A331897008FA731 /* GLUT.framework */,
+				487A89CB1A3302EE00B76BA9 /* OpenGL.framework */,
+				48A38F061A7AD6CC00AA6D07 /* boost.framework */,
+			);
+			name = frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,7 +200,7 @@
 			);
 			name = "sph-fluid";
 			productName = "sph-fluid";
-			productReference = 487A89BA1A32CA8500B76BA9 /* sph-fluid */;
+			productReference = 489FFAB21A6F0C2C001BEB53 /* sph-fluid */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -143,8 +234,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				487A89D51A330C5100B76BA9 /* main.cpp in Sources */,
-				487A89D61A330C5100B76BA9 /* SphFluidDemo.cpp in Sources */,
+				4893AE651A86D47B0079DF2C /* Mouse.cpp in Sources */,
+				4893AE6A1A86D47B0079DF2C /* Particle.cpp in Sources */,
+				4893AE6B1A86D47B0079DF2C /* main.cpp in Sources */,
+				4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */,
+				4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */,
+				4893AE701A86D47B0079DF2C /* SphFluidDemo.cpp in Sources */,
+				4893AE641A86D47B0079DF2C /* Keyboard.cpp in Sources */,
+				4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */,
+				4893AE6D1A86D47B0079DF2C /* GridRender.cpp in Sources */,
+				4893AE661A86D47B0079DF2C /* Grid.cpp in Sources */,
+				4893AE691A86D47B0079DF2C /* Vect3f.cpp in Sources */,
+				4893AE681A86D47B0079DF2C /* FluidBody.cpp in Sources */,
+				4893AE671A86D47B0079DF2C /* Wall.cpp in Sources */,
+				4893AE6C1A86D47B0079DF2C /* DebugRender.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +327,10 @@
 		487A89C41A32CA8500B76BA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -231,6 +338,10 @@
 		487A89C51A32CA8500B76BA9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -254,6 +365,7 @@
 				487A89C51A32CA8500B76BA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

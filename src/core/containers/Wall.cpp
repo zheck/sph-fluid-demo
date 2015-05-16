@@ -34,20 +34,6 @@ Vect3f & Wall::normal()
 
 void Wall::draw()
 {
-    glPushMatrix();
-    glTranslated(_center[0], _center[1], _center[2]);
-    
-    double angle1 = asin(_normal[0]) / (2 * M_PI) * 360.0;
-    double angle2 = asin(_normal[1]) / (2 * M_PI) * 360.0;
-    
-    glRotatef(-angle1, 0, 1, 0);
-    glRotatef(-angle2, 1, 0, 0);
-    
-    glTranslated(0, 0, thickness/2.0);
-    glScalef(20,20,1);
-    glutSolidCube(thickness);
-    
-    glPopMatrix();
 }
 
 

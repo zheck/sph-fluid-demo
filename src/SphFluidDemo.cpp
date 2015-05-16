@@ -287,7 +287,6 @@ void SphFluidDemo::draw()
     }
     glDisable(GL_LIGHTING);
     
-    glColor3fv(greyColor);
     
     glPopMatrix();
     

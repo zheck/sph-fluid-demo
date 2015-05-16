@@ -32,13 +32,12 @@ void keyboardCallback(unsigned char key, int x, int y)
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    SphFluidDemo::instance()->display();
+    SphFluidDemo::instance()->draw();
     glutSwapBuffers();
 }
 
 void idleCallback()
 {
-    sleep(1);
     SphFluidDemo::instance()->update();
     display();
 }

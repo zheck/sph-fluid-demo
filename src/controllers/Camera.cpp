@@ -24,9 +24,8 @@ Camera::Camera(float angle, float distance, float fovy)
 Camera::~Camera()
 {}
 
-void Camera::init(Vect3f eye, Vect3f center, Vect3f up)
+void Camera::init(Vect3f center, Vect3f up)
 {
-    _eye = eye;
     _target = center;
     _upVector = up;
 

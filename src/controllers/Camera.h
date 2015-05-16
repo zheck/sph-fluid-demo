@@ -30,7 +30,7 @@ public:
 
     Camera & operator=(Camera const & rhs);
 
-    void init(Vect3f eye, Vect3f center, Vect3f up);
+    void init(Vect3f center, Vect3f up);
     void rotate(float angle);
     void verticalRotate(float angle);
     void zoomIn();

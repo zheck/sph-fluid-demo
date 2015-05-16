@@ -56,7 +56,7 @@ public:
 protected:
     void pressureEngine();
     void physicsEngine();
-    void collisionForce(Particle& particle);
+    void collisionForce(Particle * particle);
 };
 
 //#include <iostream>

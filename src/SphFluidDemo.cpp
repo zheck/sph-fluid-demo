@@ -52,11 +52,12 @@ camera(CAMERA_ANGLE, CAMERA_DISTANCE, 70)
     _walls.push_back(Wall(Vect3f(0, 1, 0), Vect3f(0, -boxSize.y / 2.0, 0))); // bottom
     
     _numberOfParticle = 0;
-    vector<Particle>& firstGridCell = (*grid)(0,0,0);
+    vector<Particle *>& firstGridCell = (*grid)(0,0,0);
     for (double y = -boxSize.y / 2.0; y < boxSize.y / 2.0; y += PARTICLE_RADIUS/2.0) {
         for (double x = -boxSize.x / 2.0; x < -boxSize.x / 4.0; x += PARTICLE_RADIUS / 2.0) {
             for (double z = -boxSize.z / 2.0; z < boxSize.z / 2.0; z += PARTICLE_RADIUS / 2.0) {
-                firstGridCell.push_back(Particle(Vect3f(x, y,z), _numberOfParticle));
+                Particle *p = new Particle(Vect3f(x, y,z), _numberOfParticle);
+                firstGridCell.push_back(p);
                 ++_numberOfParticle;
             }
         }
@@ -78,17 +79,17 @@ void SphFluidDemo::update()
     physicsEngine();
     for (unsigned int gridCellIndex = 0; gridCellIndex < (*grid).cellCount(); gridCellIndex++) {
         
-        vector<Particle>& particles = (*grid).data()[gridCellIndex];
+        vector<Particle *>& particles = (*grid).data()[gridCellIndex];
         
         for (unsigned int p = 0; p < particles.size(); p++) {
             
-            Particle& particle = particles[p];
+            Particle * particle = particles[p];
             
-            Vect3f newPosition = particle.position() + particle.velocity()*dt + particle.acceleration()*dt*dt;
-            Vect3f newVelocity = (newPosition - particle.position()) / dt;
+            Vect3f newPosition = particle->position() + particle->velocity()*dt + particle->acceleration()*dt*dt;
+            Vect3f newVelocity = (newPosition - particle->position()) / dt;
             
-            particle.position() = newPosition;
-            particle.velocity() = newVelocity;
+            particle->position() = newPosition;
+            particle->velocity() = newVelocity;
         }
     }
     
@@ -102,13 +103,13 @@ void SphFluidDemo::updateGrid() {
     for (unsigned int x = 0; x < (*grid).xRes(); x++) {
         for (unsigned int y = 0; y < (*grid).yRes(); y++) {
             for (unsigned int z = 0; z < (*grid).zRes(); z++) {
-                vector<Particle>& particles = (*grid)(x,y,z);
+                vector<Particle *>& particles = (*grid)(x,y,z);
                 
                 for (int p = 0; p < particles.size(); p++) {
-                    Particle& particle = particles[p];
-                    int newGridCellX = (int)floor((particle.position().x + BOX_SIZE/2.0) / PARTICLE_RADIUS);
-                    int newGridCellY = (int)floor((particle.position().y + BOX_SIZE/2.0) / PARTICLE_RADIUS);
-                    int newGridCellZ = (int)floor((particle.position().z + BOX_SIZE/2.0) / PARTICLE_RADIUS);
+                    Particle * particle = particles[p];
+                    int newGridCellX = (int)floor((particle->position().x + BOX_SIZE/2.0) / PARTICLE_RADIUS);
+                    int newGridCellY = (int)floor((particle->position().y + BOX_SIZE/2.0) / PARTICLE_RADIUS);
+                    int newGridCellZ = (int)floor((particle->position().z + BOX_SIZE/2.0) / PARTICLE_RADIUS);
                     
                     if (newGridCellX < 0)
                         newGridCellX = 0;
@@ -140,7 +141,7 @@ void SphFluidDemo::updateGrid() {
 
 /*
  Calculate the acceleration of each particle using a grid optimized approach.
- For each particle, only particles in the same grid cell and the (26) neighboring grid cells must be considered,
+ For each particle, only particles in the same grid cell and the (26) neighbor->ing grid cells must be considered,
  since any particle beyond a grid cell distance away contributes no force.
  */
 void SphFluidDemo::pressureEngine()
@@ -148,9 +149,9 @@ void SphFluidDemo::pressureEngine()
     for (int x = 0; x < (*grid).xRes(); x++) {
         for (int y = 0; y < (*grid).yRes(); y++) {
             for (int z = 0; z < (*grid).zRes(); z++) {
-                vector<Particle>& particles = (*grid)(x,y,z);
+                vector<Particle *>& particles = (*grid)(x,y,z);
                 for (int p = 0; p < particles.size(); p++) {
-                    Particle& particle = particles[p];
+                    Particle * particle = particles[p];
                     float kernels = 0.0;
                     
                     for (int offsetX = -1; offsetX <= 1; offsetX++) {
@@ -165,19 +166,19 @@ void SphFluidDemo::pressureEngine()
                                 if (z+offsetZ < 0) continue;
                                 if (z+offsetZ >= (*grid).zRes()) break;
                                 
-                                vector<Particle>& neighborGridCellParticles = (*grid)(x+offsetX, y+offsetY, z+offsetZ);
+                                vector<Particle *>& neighborGridCellParticles = (*grid)(x+offsetX, y+offsetY, z+offsetZ);
                                 
                                 for (int i = 0; i < neighborGridCellParticles.size(); i++) {
-                                    Particle& neighborParticle = neighborGridCellParticles[i];
-                                    Vect3f diffPosition = particle.position() - neighborParticle.position();
+                                    Particle * neighborParticle = neighborGridCellParticles[i];
+                                    Vect3f diffPosition = particle->position() - neighborParticle->position();
                                     kernels += wpoly6Kernel(diffPosition.dot(diffPosition));
                                 }
                             }
                         }
                     }
                     
-                    particle.density() = kernels * PARTICLE_MASS;
-                    particle.pressure() = WATER_STIFFNESS * (particle.density() - PARTILE_DENSITY_REST); //pressure = k(ρ − ρ0)
+                    particle->density() = kernels * PARTICLE_MASS;
+                    particle->pressure() = WATER_STIFFNESS * (particle->density() - PARTILE_DENSITY_REST); //pressure = k(ρ − ρ0)
                 }
             }
         }
@@ -189,14 +190,14 @@ void SphFluidDemo::physicsEngine()
     for (int x = 0; x < (*grid).xRes(); x++) {
         for (int y = 0; y < (*grid).yRes(); y++) {
             for (int z = 0; z < (*grid).zRes(); z++) {
-                vector<Particle>& particles = (*grid)(x,y,z);
+                vector<Particle *>& particles = (*grid)(x,y,z);
                 for (int p = 0; p < particles.size(); p++) {
-                    Particle& particle = particles[p];
+                    Particle * particle = particles[p];
                     Vect3f f_pressure,
                     f_viscosity,
                     f_surface,
                     colorField;
-                    Vect3f f_gravity = Vect3f(0, GRAVITY, 0) * particle.density();
+                    Vect3f f_gravity = Vect3f(0, GRAVITY, 0) * particle->density();
                     
                     double colorFieldLaplacian = 0.0;
                     
@@ -212,29 +213,29 @@ void SphFluidDemo::physicsEngine()
                                 if (z+offsetZ < 0) continue;
                                 if (z+offsetZ >= (*grid).zRes()) break;
                                 
-                                vector<Particle>& neighborGridCellParticles = (*grid)(x+offsetX, y+offsetY, z+offsetZ);
+                                vector<Particle *>& neighborGridCellParticles = (*grid)(x+offsetX, y+offsetY, z+offsetZ);
                                 
                                 for (int i = 0; i < neighborGridCellParticles.size(); i++) {
-                                    Particle& neighbor = neighborGridCellParticles[i];
-                                    Vect3f diffPosition = particle.position() - neighbor.position();
+                                    Particle * neighbor = neighborGridCellParticles[i];
+                                    Vect3f diffPosition = particle->position() - neighbor->position();
                                     double radiusSquared = diffPosition.dot(diffPosition);
                                     
                                     if (radiusSquared <= PARTICLE_RADIUS * PARTICLE_RADIUS) {
                                         Vect3f poly6Gradient = wpoly6KernelGradient(radiusSquared, diffPosition);
                                         Vect3f spikyGradient = spikyKernelGradient(radiusSquared, diffPosition);
                                         
-                                        if (particle.id() != neighbor.id()) {
-                                            f_pressure += noSymmetricalPressure(particle.pressure(), particle.density(), neighbor.pressure(), neighbor.density(), spikyGradient);
-                                            f_viscosity += noSymmetricalViscosity(particle.velocity(), neighbor.velocity(), neighbor.density(), viscosityKernel(radiusSquared));
+                                        if (particle->id() != neighbor->id()) {
+                                            f_pressure += noSymmetricalPressure(particle->pressure(), particle->density(), neighbor->pressure(), neighbor->density(), spikyGradient);
+                                            f_viscosity += noSymmetricalViscosity(particle->velocity(), neighbor->velocity(), neighbor->density(), viscosityKernel(radiusSquared));
                                         }
-                                        colorField += PARTICLE_MASS * poly6Gradient / neighbor.density();
-                                        colorFieldLaplacian +=  PARTICLE_MASS * wpoly6KernelSecond(radiusSquared) / neighbor.density();
+                                        colorField += PARTICLE_MASS * poly6Gradient / neighbor->density();
+                                        colorFieldLaplacian +=  PARTICLE_MASS * wpoly6KernelSecond(radiusSquared) / neighbor->density();
                                     }
                                 }
                             }
                         }
                     }
-                    particle.normal = -1.0 * colorField;
+                    particle->normal = -1.0 * colorField;
                     
                     // surface tension force
                     double colorFieldNormalMagnitude = colorField.magnitude();
@@ -243,7 +244,7 @@ void SphFluidDemo::physicsEngine()
                     }
                     
                     
-                    particle.acceleration() = (f_pressure + f_viscosity + f_surface + f_gravity) / particle.density();
+                    particle->acceleration() = (f_pressure + f_viscosity + f_surface + f_gravity) / particle->density();
                     
                     // EXTERNAL FORCES HERE (USER INTERACTION, SWIRL)
                     Vect3f f_collision;
@@ -254,15 +255,15 @@ void SphFluidDemo::physicsEngine()
     }
 }
 
-void SphFluidDemo::collisionForce(Particle& particle) {
+void SphFluidDemo::collisionForce(Particle * particle) {
     for (unsigned int i = 0; i < _walls.size(); i++) {
         Vect3f center = _walls[i].center();
         Vect3f normal = _walls[i].normal();
-        double d = (center - particle.position()).dot(normal) + 0.01; // particle radius
+        double d = (center - particle->position()).dot(normal) + 0.01; // particle radius
         
         if (d > 0.0) {
-            particle.acceleration() += WALL_RESISTANCE * normal * d;
-            particle.acceleration() += WALL_DAMPING * particle.velocity().dot(normal) * normal;
+            particle->acceleration() += WALL_RESISTANCE * normal * d;
+            particle->acceleration() += WALL_DAMPING * particle->velocity().dot(normal) * normal;
         }
     }
 }
@@ -274,15 +275,14 @@ void SphFluidDemo::draw()
     static Vect3f whiteColor(1,1,1);
     static Vect3f greyColor(0.2, 0.2, 0.2);
     static Vect3f lightGreyColor(0.8,0.8,0.8);
-    static float shininess = 10.0;
     
     glEnable(GL_LIGHTING);
     
     for (int gridCellIndex = 0; gridCellIndex < (*grid).cellCount(); gridCellIndex++) {
-        vector<Particle>& particles = (*grid).data()[gridCellIndex];
+        vector<Particle *>& particles = (*grid).data()[gridCellIndex];
         for (int p = 0; p < particles.size(); p++) {
-            Particle& particle = particles[p];
-            particle.draw();
+            Particle * particle = particles[p];
+            particle->draw();
         }
     }
     glDisable(GL_LIGHTING);
@@ -364,7 +364,7 @@ void SphFluidDemo::draw()
 //    std::list<Particle *> particles = fluidBody.getParticles();
 //    for (std::list<Particle *>::iterator particle = particles.begin(); particle != particles.end(); ++particle) {
 //        float kernels = 0.0;
-//        std::list<Particle *> * neightborParticles = grid.getNeighborParticles(**particle);
+//        std::list<Particle *> * neightborParticles = grid.getneighbor->Particles(**particle);
 //        for (std::list<Particle *>::iterator it = neightborParticles->begin(); it != neightborParticles->end(); ++it) {
 //            Vect3f distance = (*particle)->position - (*it)->position;
 //            kernels += wpoly6Kernel(distance.dot(distance));
@@ -381,7 +381,7 @@ void SphFluidDemo::draw()
 //{
 //    std::list<Particle *> particles = fluidBody.getParticles();
 //    for (std::list<Particle *>::iterator particle = particles.begin(); particle != particles.end(); ++particle) {
-//        std::list<Particle *> * neightborParticles = grid.getNeighborParticles(**particle);
+//        std::list<Particle *> * neightborParticles = grid.getneighbor->Particles(**particle);
 //        Vect3f f_pressure, f_viscosity, f_surface, colorField;
 //        Vect3f f_gravity(0, GRAVITY, 0);
 //        float colorFieldLaplacian = 0.0;
@@ -421,10 +421,10 @@ void SphFluidDemo::draw()
 //    for (std::list<Wall *>::iterator it = walls.begin(); it != walls.end(); ++it) {
 //        Vect3f center = (*it)->center;
 //        Vect3f normal = (*it)->normal;
-//        float d = (center - particle.position).dot(normal) + 0.01;
+//        float d = (center - particle->position).dot(normal) + 0.01;
 //        if (d > 0.0) {
-//            particle.acceleration += normal * WALL_RESISTANCE * d;
-//            particle.acceleration += normal * particle.velocity.dot(normal) * WALL_DAMPING;
+//            particle->acceleration += normal * WALL_RESISTANCE * d;
+//            particle->acceleration += normal * particle->velocity.dot(normal) * WALL_DAMPING;
 //        }
 //    }
 //}

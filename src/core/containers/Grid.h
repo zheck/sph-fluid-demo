@@ -33,7 +33,7 @@ private:
     int _xRes;
     int _yRes;
     int _zRes;
-    std::vector<Particle> *_data;
+    std::vector<Particle *> *_data;
     int _cellCount;
     
 public:
@@ -49,14 +49,14 @@ public:
     Vect3f & getOrigin();
     Vect3f getCenter();
     
-    inline std::vector<Particle> & operator()(int x, int y, int z) {
+    inline std::vector<Particle *> & operator()(int x, int y, int z) {
         return _data[x + y * _xRes + z * _xRes * _yRes];
     }
     int xRes() {return _xRes;};
     int yRes() {return _yRes;};
     int zRes() {return _zRes;};
     int cellCount() {return _cellCount;};
-    std::vector<Particle> * data() {return _data;};
+    std::vector<Particle *> * data() {return _data;};
     
 private:
     void computeSpacing(int numberOfParticle);

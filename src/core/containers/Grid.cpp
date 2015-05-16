@@ -16,14 +16,6 @@ Grid::Grid() :
 _origin(0, 0, 0),
 _dimension(GRID_SIZE, GRID_SIZE, GRID_SIZE)
 {
-    Vect3f center = (_dimension - _origin) * 0.5;
-    
-    _walls.push_back(new Wall(Vect3f(center.x, _dimension.y, center.z), Vect3f(0, 1, 0))); // top
-    _walls.push_back(new Wall(Vect3f(center.x, _origin.y, center.z), Vect3f(0, 1, 0))); // bot
-    _walls.push_back(new Wall(Vect3f(_origin.x, center.y, center.z), Vect3f(1, 0, 0))); // left
-    _walls.push_back(new Wall(Vect3f(_dimension.x, center.y, center.z), Vect3f(1, 0, 0))); // right
-    _walls.push_back(new Wall(Vect3f(center.x, center.y, _origin.z), Vect3f(0, 0, 1))); // front
-    _walls.push_back(new Wall(Vect3f(center.x, center.y, _dimension.z), Vect3f(0, 0, 1))); // back
 }
 
 Grid::Grid(int x, int y, int z) :
@@ -34,7 +26,7 @@ _dimension(GRID_SIZE, GRID_SIZE, GRID_SIZE)
     _yRes = y;
     _zRes = z;
     _cellCount = x * y * z;
-    _data = new std::vector<Particle>[_cellCount];
+    _data = new std::vector<Particle *>[_cellCount];
 }
 
 Grid::~Grid()
@@ -43,7 +35,6 @@ Grid::~Grid()
 
 void Grid::init(int numberOfParticles)
 {
-    computeSpacing(numberOfParticles);
 }
 
 std::list<Wall *> & Grid::getWalls()
@@ -61,29 +52,6 @@ Vect3f Grid::getCenter()
     return (_dimension - _origin) * 0.5;
 }
 
-void Grid::computeSpacing(int numberOfParticle)
-{
-    float volume = _dimension.x * _dimension.y * _dimension.z;
-    float cellVolumCubeRoot = powf(volume / numberOfParticle, -1.0 / 3.0);
-    
-    numberOfCell.x = getNextPowerOf2(fmax(1, _dimension.x * cellVolumCubeRoot + 0.5));
-    numberOfCell.y = getNextPowerOf2(fmax(1, _dimension.y * cellVolumCubeRoot + 0.5));
-    numberOfCell.z = getNextPowerOf2(fmax(1, _dimension.z * cellVolumCubeRoot + 0.5));
-    particleSpacing.x = _dimension.x / (numberOfCell.x + 1);
-    particleSpacing.y = _dimension.y / (numberOfCell.y + 1);
-    particleSpacing.z = _dimension.z / (numberOfCell.z + 1);
-}
-
-int Grid::getNextPowerOf2(int number)
-{
-    unsigned int power = 0;
-    
-    --number;
-    while (number >> power != 0) {
-        ++power;
-    }
-    return (1 << power);
-}
 
 //#include <algorithm>
 //

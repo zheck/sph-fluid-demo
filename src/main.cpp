@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
+#include <unistd.h>
 
 #include "SphFluidDemo.h"
 #include "config.h"
@@ -37,6 +38,7 @@ void display(void)
 
 void idleCallback()
 {
+    sleep(1);
     SphFluidDemo::instance()->update();
     display();
 }

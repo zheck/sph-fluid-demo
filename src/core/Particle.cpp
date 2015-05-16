@@ -9,15 +9,11 @@
 #include "Particle.h"
 
 Particle::Particle(Vect3f const & pos) :
-_position(pos)
+position(pos),
+velocity(0, 0, 0)
 {
 }
 
 Particle::~Particle()
 {
-}
-
-Vect3f & Particle::getPosition()
-{
-    return _position;
 }

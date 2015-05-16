@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		485F43181B0742BF009E70DE /* sph_formulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 485F43161B0742BF009E70DE /* sph_formulas.cpp */; };
 		487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487A89CB1A3302EE00B76BA9 /* OpenGL.framework */; };
 		4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE431A86D47B0079DF2C /* Camera.cpp */; };
 		4893AE641A86D47B0079DF2C /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE451A86D47B0079DF2C /* Keyboard.cpp */; };
@@ -39,6 +40,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		485F43161B0742BF009E70DE /* sph_formulas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_formulas.cpp; sourceTree = "<group>"; };
+		485F43171B0742BF009E70DE /* sph_formulas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sph_formulas.h; sourceTree = "<group>"; };
 		487A89CB1A3302EE00B76BA9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		4893AE411A86D47B0079DF2C /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		4893AE431A86D47B0079DF2C /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 			children = (
 				4893AE521A86D47B0079DF2C /* Vect3f.cpp */,
 				4893AE531A86D47B0079DF2C /* Vect3f.h */,
+				485F43161B0742BF009E70DE /* sph_formulas.cpp */,
+				485F43171B0742BF009E70DE /* sph_formulas.h */,
 			);
 			path = maths;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4893AE651A86D47B0079DF2C /* Mouse.cpp in Sources */,
+				485F43181B0742BF009E70DE /* sph_formulas.cpp in Sources */,
 				4893AE6A1A86D47B0079DF2C /* Particle.cpp in Sources */,
 				4893AE6B1A86D47B0079DF2C /* main.cpp in Sources */,
 				4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */,

@@ -8,6 +8,7 @@
 
 #include <sstream>
 #include <iomanip>
+#include <math.h>
 
 #include "Vect3f.h"
 
@@ -41,9 +42,28 @@ Vect3f & Vect3f::operator=(Vect3f const & rhs)
     return *this;
 }
 
+Vect3f Vect3f::operator+(const Vect3f & rhs) const
+{
+    return (Vect3f(x + rhs.x, y + rhs.y, z + rhs.z));
+}
+
+Vect3f Vect3f::operator+=(Vect3f const & rhs)
+{
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
+
+    return *this;
+}
+
 Vect3f Vect3f::operator-(const Vect3f & rhs) const
 {
     return (Vect3f(x - rhs.x, y - rhs.y, z - rhs.z));
+}
+
+Vect3f Vect3f::operator-(float f) const
+{
+    return (Vect3f(x - f, y - f, z - f));
 }
 
 Vect3f Vect3f::operator*(const Vect3f & rhs) const
@@ -54,6 +74,21 @@ Vect3f Vect3f::operator*(const Vect3f & rhs) const
 Vect3f Vect3f::operator*(float f) const
 {
     return Vect3f(x * f, y * f, z * f);
+}
+
+Vect3f Vect3f::operator/(float f) const
+{
+    return Vect3f(x / f, y / f, z / f);
+}
+
+float Vect3f::magnitude() const
+{
+    return sqrt (x * x + y * y + z * z);
+}
+
+float Vect3f::dot(const Vect3f &rhs) const
+{
+    return x * rhs.x + y * rhs.y + z * rhs.z;
 }
 
 std::string Vect3f::getPosition() const

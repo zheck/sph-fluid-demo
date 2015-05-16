@@ -24,7 +24,7 @@ protected:
     Vect3f _origin;
     Vect3f _dimension;
     std::list<Wall *> _walls;
-    std::vector<Particle *> *_particles;
+    std::list<Particle *> *_particles;
     int _numberOfCell;
 
 public:
@@ -33,13 +33,16 @@ public:
     ~Grid();
 
     Grid & operator=(Grid const & rhs);
-    std::vector<Particle *> & operator()(int x, int y, int z);
+    std::list<Particle *> & operator()(int x, int y, int z);
 
     std::list<Wall *> & getWalls();
     Vect3f & origin();
     Vect3f & dimension();
     Vect3f getCenter() const;
+    int numberOfCell() const;
     void update();
+    std::list<Particle *> * getNeighborParticles(Particle & particle);
+    void addParticleForCellId(std::list<Particle *> & particles, int cellId);
 
 private:
     int getNextPowerOf2(int number);

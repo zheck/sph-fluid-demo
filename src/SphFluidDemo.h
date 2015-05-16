@@ -40,6 +40,11 @@ public:
     void init();
     void update();
     void display();
+
+protected:
+    void step1(); // pressure
+    void step2(); // forces
+    void collisions(Particle & particle);
 };
 
 #endif /* defined(__sph_fluid__SphFluidDemo__) */

@@ -16,7 +16,13 @@
 
 class Particle
 {
-    Vect3f _position;
+public:
+    Vect3f position;
+    Vect3f velocity;
+    Vect3f normal;
+    Vect3f acceleration;
+    float density;
+    float pressure;
 
 public:
     Particle(Vect3f const & position);
@@ -24,8 +30,6 @@ public:
     ~Particle();
 
     Particle & operator=(Particle const & rhs);
-
-    Vect3f & getPosition();
 };
 
 #endif /* defined(__sph_fluid__Particle__) */

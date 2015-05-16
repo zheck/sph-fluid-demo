@@ -26,10 +26,16 @@ public:
     ~Vect3f();
 
     Vect3f & operator=(Vect3f const & rhs);
+    Vect3f operator+=(Vect3f const & rhs);
+    Vect3f operator+(Vect3f const & rhs) const;
     Vect3f operator-(Vect3f const & rhs) const;
+    Vect3f operator-(float f) const;
     Vect3f operator*(Vect3f const & rhs) const;
     Vect3f operator*(float f) const;
+    Vect3f operator/(float f) const;
 
+    float dot(const Vect3f & rhs) const;
+    float magnitude() const;
     std::string getPosition() const;
 };
 

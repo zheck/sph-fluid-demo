@@ -6,45 +6,54 @@
 //  Copyright (c) 2015 zhou. All rights reserved.
 //
 
-
 #include <algorithm>
 
 #include "Grid.h"
 #include "config.h"
 
-Grid::Grid() :
-_origin(0, 0, 0),
-_dimension(GRID_SIZE, GRID_SIZE, GRID_SIZE)
+Grid::Grid(Vect3f const & origin, Vect3f const & dimension) :
+_origin(origin),
+_dimension(dimension)
 {
-}
-
-Grid::Grid(int x, int y, int z) :
-_origin(0, 0, 0),
-_dimension(GRID_SIZE, GRID_SIZE, GRID_SIZE)
-{
-    _xRes = x;
-    _yRes = y;
-    _zRes = z;
-    _cellCount = x * y * z;
+    _cellCount = _dimension.x * _dimension.y * _dimension.z;
     _data = new std::vector<Particle *>[_cellCount];
+
+    boxSize.x = BOX_SIZE;
+    boxSize.y = BOX_SIZE;
+    boxSize.z = BOX_SIZE;
+    center = (_origin + boxSize + _origin) * 0.5;
+    std::cout << center.getPosition() << std::endl;
+
+    _walls.push_back(Wall(Vect3f(center.x, center.y, _origin.z), Vect3f(0, 0, 1))); // back
+    _walls.push_back(Wall(Vect3f(center.x, center.y, _origin.z + boxSize.z), Vect3f(0, 0, -1))); // front
+    _walls.push_back(Wall(Vect3f(_origin.x, center.y, center.z), Vect3f(1, 0, 0))); // left
+    _walls.push_back(Wall(Vect3f(_origin.x + boxSize.x, center.y, center.z), Vect3f(-1, 0, 0))); // right
+    _walls.push_back(Wall(Vect3f(center.x, _origin.y, center.z), Vect3f(0, 1, 0))); // bottom
 }
 
 Grid::~Grid()
 {
+    _walls.clear();
 }
 
-void Grid::init(int numberOfParticles)
+Vect3f Grid::dimension()
 {
+    return _dimension;
 }
 
-std::list<Wall *> & Grid::getWalls()
-{
-    return _walls;
-}
-
-Vect3f & Grid::getOrigin()
+Vect3f Grid::origin()
 {
     return _origin;
+}
+
+std::vector<Particle *> & Grid::operator()(int x, int y, int z)
+{
+    return _data[x + y * (int)_dimension.x + z * (int)_dimension.x * (int)_dimension.y];
+}
+
+std::list<Wall> & Grid::getWalls()
+{
+    return _walls;
 }
 
 Vect3f Grid::getCenter()

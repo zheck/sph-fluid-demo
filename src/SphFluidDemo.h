@@ -12,15 +12,13 @@
 
 #include <vector>
 
-#include "Particle.h"
-#include "Grid.h"
-#include "Wall.h"
-
-
 #include "config.h"
 #include "Singleton.h"
 #include "Camera.h"
 #include "Keyboard.h"
+#include "FluidBody.h"
+#include "Grid.h"
+#include "Particle.h"
 
 using namespace std;
 
@@ -29,18 +27,10 @@ class SphFluidDemo : public Singleton<SphFluidDemo>
 public:
     Camera camera;
     Keyboard keyboard;
+    Grid grid;
+    FluidBody fluidBody;
     
 public:
-    void init();
-    
-private:
-    vector<Particle> _particles;
-    vector<Wall>     _walls;
-    Vect3f boxSize;
-    int _numberOfParticle;
-    
-public:
-    Grid* grid;
     double surfaceThreshold;
     Vect3f gravityVector;
     

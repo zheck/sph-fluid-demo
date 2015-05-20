@@ -25,7 +25,7 @@ std::list<Particle *> & FluidBody::getParticles()
     return _particles;
 }
 
-void FluidBody::addParticle(Particle  *particle)
+void FluidBody::addParticle(Particle *particle)
 {
     _particles.push_back(particle);
 }

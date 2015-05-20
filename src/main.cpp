@@ -15,11 +15,6 @@
 #include "SphFluidDemo.h"
 #include "config.h"
 
-void init(void)
-{
-    SphFluidDemo::instance()->init();
-}
-
 void keyboardCallback(unsigned char key, int x, int y)
 {
     if (key == 'q') {
@@ -55,7 +50,6 @@ int main(int argc, char **argv)
     glutDisplayFunc(display);
 
     glClearColor(164, 164, 164, 1.0);
-    init();
 
     glutMainLoop();
 

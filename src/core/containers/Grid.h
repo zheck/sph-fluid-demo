@@ -21,40 +21,37 @@
 class Grid
 {
 public:
-    Vect3f particleSpacing;
-    Vect3f numberOfCell;
-    
+    Vect3f boxSize;
+    Vect3f center;
+
 protected:
     Vect3f _origin;
     Vect3f _dimension;
-    std::list<Wall *> _walls;
+
+public:
+    Grid(Vect3f const & origin, Vect3f const & dimension);
+    Grid(Grid const & rhs);
+    ~Grid();
+
+    Grid & operator=(Grid const & rhs);
+
+protected:
+
+    std::list<Wall> _walls;
+
     
 private:
-    int _xRes;
-    int _yRes;
-    int _zRes;
     std::vector<Particle *> *_data;
     int _cellCount;
     
 public:
-    Grid();
-    Grid(int x, int y, int z);
-    Grid(Grid const & rhs);
-    ~Grid();
-    
-    Grid & operator=(Grid const & rhs);
-    
-    void init(int numberOfParticles);
-    std::list<Wall *> & getWalls();
-    Vect3f & getOrigin();
+    std::list<Wall> & getWalls();
+
     Vect3f getCenter();
-    
-    inline std::vector<Particle *> & operator()(int x, int y, int z) {
-        return _data[x + y * _xRes + z * _xRes * _yRes];
-    }
-    int xRes() {return _xRes;};
-    int yRes() {return _yRes;};
-    int zRes() {return _zRes;};
+
+    Vect3f origin();
+    Vect3f dimension();
+    std::vector<Particle *> & operator()(int x, int y, int z);
     int cellCount() {return _cellCount;};
     std::vector<Particle *> * data() {return _data;};
     

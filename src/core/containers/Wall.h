@@ -17,41 +17,19 @@ class Wall
 {
     Vect3f _center;
     Vect3f _normal;
+    float _size;
     
 public:
-    float size;
-    
-public:
-    Wall(Vect3f const & normal, Vect3f const & center);
-    //    Wall(Wall const & rhs);
+    Wall(Vect3f const & center, Vect3f const & normal);
+    Wall(Wall const & rhs);
     ~Wall();
     
-    //    Wall & operator=(Wall const & rhs);
+    Wall & operator=(Wall const & rhs);
     
     Vect3f & normal();
     Vect3f & center();
     
     void draw();
 };
-
-//#include <stdio.h>
-//
-//#include "Vect3f.h"
-//
-//class Wall
-//{
-//public:
-//    Vect3f center;
-//    Vect3f normal;
-//    float size;
-//    float thickness;
-//
-//public:
-//    Wall(Vect3f const & origin, Vect3f const & center);
-//    Wall(Wall const & rhs);
-//    ~Wall();
-//
-//    Wall & operator=(Wall const & rhs);
-//};
 
 #endif /* defined(__sph_fluid__Wall__) */

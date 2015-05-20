@@ -41,9 +41,7 @@ public:
     Vect3f normal;
     
 public:
-    
     void draw();
-    void clearForce() { _force *= 0; };
     void addForce(Vect3f newForce) { _force += newForce; };
     void calculateAcceleration();
     

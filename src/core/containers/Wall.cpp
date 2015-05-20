@@ -6,17 +6,21 @@
 //  Copyright (c) 2015 zhou. All rights reserved.
 //
 
-#define thickness 0.02
-
-#include <GLUT/GLUT.h>
-
 #include "Wall.h"
+#include "config.h"
 
-Wall::Wall(const Vect3f& normal, const Vect3f& center)
+Wall::Wall(const Vect3f& center, const Vect3f& normal)
 {
-    _normal = normal;
     _center = center;
-    _normal.normalize();
+    _normal = normal;
+    _size = BOX_SIZE;
+}
+
+Wall::Wall(Wall const & rhs)
+{
+    _center = rhs._center;
+    _normal = rhs._normal;
+    _size = rhs._size;
 }
 
 Wall::~Wall()
@@ -35,20 +39,3 @@ Vect3f & Wall::normal()
 void Wall::draw()
 {
 }
-
-
-//
-//#include "Wall.h"
-//#include "config.h"
-//
-//Wall::Wall(Vect3f const & center, Vect3f const & normal)
-//{
-//    this->center = center;
-//    this->normal = normal;
-//    size = GRID_SIZE;
-//    thickness = WALL_THICKNESS;
-//}
-//
-//Wall::~Wall()
-//{
-//}

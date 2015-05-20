@@ -93,20 +93,6 @@ Vect3f Vect3f::operator/(float f) const
     return Vect3f(x / f, y / f, z / f);
 }
 
-Vect3f Vect3f::normalize()
-{
-    float l = x * x + y * y + z * z;
-
-    if (l != 1.0 && l != 0.0) {
-        float inv = 1.0 / sqrt(l);
-        x *= inv;
-        y *= inv;
-        z *= inv;
-    }
-
-    return *this;
-}
-
 float Vect3f::magnitude() const
 {
     return sqrt (x * x + y * y + z * z);

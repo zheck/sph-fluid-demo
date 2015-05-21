@@ -15,7 +15,7 @@ camera(CAMERA_ANGLE, CAMERA_DISTANCE, 70),
 grid(Vect3f(0, 0, 0), Vect3f(10, 10, 10))
 {
     int numberOfParticle = 0;
-    vector<Particle *>& firstGridCell = grid(0,0,0);
+    std::vector<Particle *>& firstGridCell = grid(0,0,0);
     for (float y = grid.origin().y; y < grid.origin().y + grid.boxSize.y; y += PARTICLE_RADIUS / 2.0) {
         for (float x = grid.origin().x; x < (grid.origin().x + grid.boxSize.x * 0.25); x += PARTICLE_RADIUS / 2.0) {
             for (float z = grid.origin().z; z < grid.origin().z + grid.boxSize.z; z += PARTICLE_RADIUS / 2.0) {
@@ -26,12 +26,13 @@ grid(Vect3f(0, 0, 0), Vect3f(10, 10, 10))
             }
         }
     }
-    camera.init(grid.center, Vect3f(0, 1, 0));
-    updateGrid();
+    camera.init(grid.center(), Vect3f(0, 1, 0));
+    grid.update();
 }
 
 SphFluidDemo::~SphFluidDemo()
 {
+    std::cout << "demo finished" << std::endl;
 }
 
 void SphFluidDemo::update()
@@ -39,9 +40,9 @@ void SphFluidDemo::update()
     float dt = 1.0 / 100.0;
     pressureEngine();
     physicsEngine();
-    for (unsigned int gridCellIndex = 0; gridCellIndex < grid.cellCount(); gridCellIndex++) {
+    for (unsigned int gridCellIndex = 0; gridCellIndex < grid.numberOfCell(); gridCellIndex++) {
         
-        vector<Particle *>& particles = grid.data()[gridCellIndex];
+        std::vector<Particle *>& particles = grid.particles()[gridCellIndex];
         
         for (unsigned int p = 0; p < particles.size(); p++) {
             
@@ -54,51 +55,8 @@ void SphFluidDemo::update()
             particle->velocity() = newVelocity;
         }
     }
-    
-    updateGrid();
-}
 
-// to update the grid cells particles are located in
-// should be called right after particle positions are updated
-void SphFluidDemo::updateGrid() {
-    
-    for (unsigned int x = 0; x < grid.dimension().x; x++) {
-        for (unsigned int y = 0; y < grid.dimension().y; y++) {
-            for (unsigned int z = 0; z < grid.dimension().z; z++) {
-                vector<Particle *>& particles = grid(x,y,z);
-                
-                for (int p = 0; p < particles.size(); p++) {
-                    Particle * particle = particles[p];
-                    int newGridCellX = (int)floor((particle->position().x + 0.1) / PARTICLE_RADIUS);
-                    int newGridCellY = (int)floor((particle->position().y + 0.1) / PARTICLE_RADIUS);
-                    int newGridCellZ = (int)floor((particle->position().z + 0.1) / PARTICLE_RADIUS);
-
-                    if (newGridCellX < 0)
-                        newGridCellX = 0;
-                    else if (newGridCellX >= grid.dimension().x)
-                        newGridCellX = grid.dimension().x - 1;
-                    if (newGridCellY < 0)
-                        newGridCellY = 0;
-                    else if (newGridCellY >= grid.dimension().y)
-                        newGridCellY = grid.dimension().y - 1;
-                    if (newGridCellZ < 0)
-                        newGridCellZ = 0;
-                    else if (newGridCellZ >= grid.dimension().z)
-                        newGridCellZ = grid.dimension().z - 1;
-                    
-                    if (x != newGridCellX || y != newGridCellY || z != newGridCellZ) {
-                        // move the particle to the new grid cell
-                        grid(newGridCellX, newGridCellY, newGridCellZ).push_back(particle);
-                        
-                        // remove it from it's previous grid cell
-                        particles[p] = particles.back();
-                        particles.pop_back();
-                        p--; // important! make sure to redo this index, since a new particle will (probably) be there
-                    }
-                }
-            }
-        }
-    }
+    grid.update();
 }
 
 /*
@@ -111,7 +69,7 @@ void SphFluidDemo::pressureEngine()
     for (int x = 0; x < grid.dimension().x; x++) {
         for (int y = 0; y < grid.dimension().y; y++) {
             for (int z = 0; z < grid.dimension().z; z++) {
-                vector<Particle *>& particles = grid(x,y,z);
+                std::vector<Particle *>& particles = grid(x,y,z);
                 for (int p = 0; p < particles.size(); p++) {
                     Particle * particle = particles[p];
                     float kernels = 0.0;
@@ -128,7 +86,7 @@ void SphFluidDemo::pressureEngine()
                                 if (z+offsetZ < 0) continue;
                                 if (z+offsetZ >= grid.dimension().z) break;
                                 
-                                vector<Particle *>& neighborGridCellParticles = grid(x+offsetX, y+offsetY, z+offsetZ);
+                                std::vector<Particle *>& neighborGridCellParticles = grid(x+offsetX, y+offsetY, z+offsetZ);
                                 
                                 for (int i = 0; i < neighborGridCellParticles.size(); i++) {
                                     Particle * neighborParticle = neighborGridCellParticles[i];
@@ -152,7 +110,7 @@ void SphFluidDemo::physicsEngine()
     for (int x = 0; x < grid.dimension().x; x++) {
         for (int y = 0; y < grid.dimension().y; y++) {
             for (int z = 0; z < grid.dimension().z; z++) {
-                vector<Particle *>& particles = grid(x,y,z);
+                std::vector<Particle *>& particles = grid(x,y,z);
                 for (int p = 0; p < particles.size(); p++) {
                     Particle * particle = particles[p];
                     Vect3f f_pressure,
@@ -175,7 +133,7 @@ void SphFluidDemo::physicsEngine()
                                 if (z+offsetZ < 0) continue;
                                 if (z+offsetZ >= grid.dimension().z) break;
                                 
-                                vector<Particle *>& neighborGridCellParticles = grid(x+offsetX, y+offsetY, z+offsetZ);
+                                std::vector<Particle *>& neighborGridCellParticles = grid(x+offsetX, y+offsetY, z+offsetZ);
                                 
                                 for (int i = 0; i < neighborGridCellParticles.size(); i++) {
                                     Particle * neighbor = neighborGridCellParticles[i];
@@ -241,8 +199,8 @@ void SphFluidDemo::draw()
 
     glEnable(GL_LIGHTING);
     
-    for (int gridCellIndex = 0; gridCellIndex < grid.cellCount(); gridCellIndex++) {
-        vector<Particle *>& particles = grid.data()[gridCellIndex];
+    for (int gridCellIndex = 0; gridCellIndex < grid.numberOfCell(); gridCellIndex++) {
+        std::vector<Particle *>& particles = grid.particles()[gridCellIndex];
         for (int p = 0; p < particles.size(); p++) {
             Particle * particle = particles[p];
             particle->draw();
@@ -254,18 +212,11 @@ void SphFluidDemo::draw()
     glPopMatrix();
     
     glPushMatrix();
-    glTranslatef(grid.center.x, grid.center.y, grid.center.z);
+    glTranslatef(grid.center().x, grid.center().y, grid.center().z);
     glScaled(grid.boxSize.x, grid.boxSize.y, grid.boxSize.z);
     glutWireCube(1.0);
     glPopMatrix();
 }
-
-//#include <GLUT/GLUT.h>
-//#include <iostream>
-//
-//#include "SphFluidDemo.h"
-//#include "config.h"
-//#include "sph_formulas.h"
 //
 //SphFluidDemo::SphFluidDemo() :
 //grid(Vect3f(0, 0, 0), Vect3f(GRID_SIZE, GRID_SIZE, GRID_SIZE)),

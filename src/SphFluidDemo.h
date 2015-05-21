@@ -20,8 +20,6 @@
 #include "Grid.h"
 #include "Particle.h"
 
-using namespace std;
-
 class SphFluidDemo : public Singleton<SphFluidDemo>
 {
 public:
@@ -36,12 +34,13 @@ public:
     
 public:
     SphFluidDemo();
+    SphFluidDemo(SphFluidDemo const & rhs);
     ~SphFluidDemo();
 
+    SphFluidDemo & operator=(SphFluidDemo const & rhs);
 
-    void updateGrid();
-    void draw();
     void update();
+    void draw();
     
 protected:
     void pressureEngine();
@@ -49,16 +48,6 @@ protected:
     void collisionForce(Particle * particle);
 };
 
-//#include <iostream>
-//
-//#include "Singleton.h"
-//#include "Keyboard.h"
-//#include "Camera.h"
-//#include "Mouse.h"
-//#include "FluidBody.h"
-//#include "SphDemoRender.h"
-//#include "Grid.h"
-//
 //class SphFluidDemo : public Singleton<SphFluidDemo>
 //{
 //public:

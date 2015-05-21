@@ -24,7 +24,6 @@
 		4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */; };
 		4893AE701A86D47B0079DF2C /* SphFluidDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE611A86D47B0079DF2C /* SphFluidDemo.cpp */; };
 		489A61321A331897008FA731 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489A61311A331897008FA731 /* GLUT.framework */; };
-		48A38F071A7AD6CC00AA6D07 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A38F061A7AD6CC00AA6D07 /* boost.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,7 +73,6 @@
 		4893AE621A86D47B0079DF2C /* SphFluidDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphFluidDemo.h; sourceTree = "<group>"; };
 		489A61311A331897008FA731 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		489FFAB21A6F0C2C001BEB53 /* sph-fluid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "sph-fluid"; sourceTree = BUILT_PRODUCTS_DIR; };
-		48A38F061A7AD6CC00AA6D07 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = /Library/Frameworks/boost.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48A38F071A7AD6CC00AA6D07 /* boost.framework in Frameworks */,
 				489A61321A331897008FA731 /* GLUT.framework in Frameworks */,
 				487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */,
 			);
@@ -183,7 +180,6 @@
 			children = (
 				489A61311A331897008FA731 /* GLUT.framework */,
 				487A89CB1A3302EE00B76BA9 /* OpenGL.framework */,
-				48A38F061A7AD6CC00AA6D07 /* boost.framework */,
 			);
 			name = frameworks;
 			sourceTree = "<group>";

@@ -20,13 +20,15 @@
 
 class Grid
 {
-public:
-    Vect3f boxSize;
-    Vect3f center;
-
-protected:
     Vect3f _origin;
     Vect3f _dimension;
+    Vect3f _center;
+    std::list<Wall> _walls;
+    std::vector<Particle *> *_particles;
+    int _numberOfCell;
+
+public:
+    Vect3f boxSize;
 
 public:
     Grid(Vect3f const & origin, Vect3f const & dimension);
@@ -35,68 +37,17 @@ public:
 
     Grid & operator=(Grid const & rhs);
 
-protected:
-
-    std::list<Wall> _walls;
-
-    
-private:
-    std::vector<Particle *> *_data;
-    int _cellCount;
-    
-public:
+    Vect3f origin() const;
+    Vect3f center() const;
+    Vect3f dimension() const;
+    int numberOfCell() const;
+    void update();
     std::list<Wall> & getWalls();
-
-    Vect3f getCenter();
-
-    Vect3f origin();
-    Vect3f dimension();
     std::vector<Particle *> & operator()(int x, int y, int z);
-    int cellCount() {return _cellCount;};
-    std::vector<Particle *> * data() {return _data;};
-    
-private:
-    void computeSpacing(int numberOfParticle);
-    int getNextPowerOf2(int number);
-};
+    std::vector<Particle *> * particles() {return _particles;};
 
-//#include <stdio.h>
-//#include <math.h>
-//#include <list>
-//#include <vector>
-//
-//#include "Vect3f.h"
-//#include "Wall.h"
-//#include "Particle.h"
-//
-//class Grid
-//{
-//protected:
-//    Vect3f _origin;
-//    Vect3f _dimension;
-//    std::list<Wall *> _walls;
-//    std::list<Particle *> *_particles;
-//    int _numberOfCell;
-//
-//public:
-//    Grid(Vect3f const & origin, Vect3f const & dimension);
-//    Grid(Grid const & rhs);
-//    ~Grid();
-//
-//    Grid & operator=(Grid const & rhs);
-//    std::list<Particle *> & operator()(int x, int y, int z);
-//
-//    std::list<Wall *> & getWalls();
-//    Vect3f & origin();
-//    Vect3f & dimension();
-//    Vect3f getCenter() const;
-//    int numberOfCell() const;
-//    void update();
-//    std::list<Particle *> * getNeighborParticles(Particle & particle);
-//    void addParticleForCellId(std::list<Particle *> & particles, int cellId);
-//
-//private:
-//    int getNextPowerOf2(int number);
-//};
+protected:
+    int newPosition(float value, int min, int max) const;
+};
 
 #endif /* defined(__sph_fluid__Grid__) */

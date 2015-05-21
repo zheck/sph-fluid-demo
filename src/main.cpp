@@ -15,11 +15,16 @@
 #include "SphFluidDemo.h"
 #include "config.h"
 
+bool play = false;
+
 void keyboardCallback(unsigned char key, int x, int y)
 {
     if (key == 'q') {
         SphFluidDemo::kill();
         exit(0);
+    }
+    if (key == 'a') {
+        play = true;
     }
     SphFluidDemo::instance()->keyboard.update(key, x, y);
 }
@@ -33,7 +38,9 @@ void display(void)
 
 void idleCallback()
 {
-    SphFluidDemo::instance()->update();
+    if (play == true) {
+        SphFluidDemo::instance()->update();
+    }
     display();
 }
 

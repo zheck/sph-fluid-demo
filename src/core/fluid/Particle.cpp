@@ -10,8 +10,8 @@
 #include "Particle.h"
 #include "config.h"
 
-Particle::Particle(const Vect3f& position, int particleId) :
-_position(position)
+Particle::Particle(const Vect3f& pos, int particleId) :
+position(pos)
 {
     myQuadric = NULL;
     _id = particleId;
@@ -25,7 +25,7 @@ void Particle::draw()
     glPushMatrix();
     
     glColor3f(0.01, 0.26, 1.0);
-    glTranslated(_position.x, _position.y, _position.z);
+    glTranslated(position.x, position.y, position.z);
     glutSolidSphere(PARTICLE_RENDER_RADIUS, 10, 10);
     
     glPopMatrix();

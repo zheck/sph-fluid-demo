@@ -29,10 +29,6 @@ public:
     FluidBody fluidBody;
     
 public:
-    double surfaceThreshold;
-    Vect3f gravityVector;
-    
-public:
     SphFluidDemo();
     SphFluidDemo(SphFluidDemo const & rhs);
     ~SphFluidDemo();
@@ -43,37 +39,9 @@ public:
     void draw();
     
 protected:
-    void pressureEngine();
-    void physicsEngine();
-    void collisionForce(Particle * particle);
+    void step1();
+    void step2();
+    void collisions(Particle * particle);
 };
-
-//class SphFluidDemo : public Singleton<SphFluidDemo>
-//{
-//public:
-//    Camera camera;
-//    Keyboard keyboard;
-//    Mouse mouse;
-//    Grid grid;
-//
-//    FluidBody fluidBody;
-//    SphDemoRender renderer;
-//
-//public:
-//    SphFluidDemo();
-//    SphFluidDemo(SphFluidDemo const & rhs);
-//    ~SphFluidDemo();
-//
-//    SphFluidDemo & operator=(SphFluidDemo const & rhs);
-//
-//    void init();
-//    void update();
-//    void display();
-//
-//protected:
-//    void step1(); // pressure
-//    void step2(); // forces
-//    void collisions(Particle & particle);
-//};
 
 #endif /* defined(__sph_fluid__SphFluidDemo__) */

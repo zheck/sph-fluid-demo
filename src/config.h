@@ -38,13 +38,13 @@ static const float PARTICLE_RENDER_RADIUS = 0.015;
 static const float PARTICLE_RADIUS = 0.045;
 static const float PARTICLE_RADIUS_SQUARE = PARTICLE_RADIUS * PARTICLE_RADIUS;
 static const float PARTICLE_MASS = 0.018; // KG
-static const float PARTILE_DENSITY_REST = 998.29; // kg/m^3 is rest density of water Particle
+static const float PARTICLE_DENSITY_REST = 998.29; // kg/m^3 is rest density of water Particle
 static const float PARTICLE_VISCOSITY = 1.308;
 
 static const float WATER_STIFFNESS = 3.0;
 
 //
-//static const int MAX_PARTICLE = 3;
+static const int MAX_PARTICLE = 500;
 //static const float ROTATION_SCALE = 0.1;
 //static const int ZOOM_SCALE = 1;
 //static const float PI = 3.141592;

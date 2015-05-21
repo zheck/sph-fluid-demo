@@ -18,21 +18,21 @@
 #include <vector>
 
 class Particle {
-    Vect3f _position;
     int _id;
     
 public:
-    
+    Vect3f position;
+    Vect3f velocity;
+    Vect3f acceleration;
+    float density;
+    float pressure;
+
 public:
     Particle(Vect3f const & position, int particleId);
     ~Particle();
     
 private:
-    Vect3f _velocity;
     Vect3f _force;
-    Vect3f _acceleration;
-    double _density;
-    double _pressure;
     bool _flag;
     
     GLUquadricObj* myQuadric;
@@ -42,15 +42,9 @@ public:
     
 public:
     void draw();
-    void addForce(Vect3f newForce) { _force += newForce; };
     void calculateAcceleration();
     
-    Vect3f& position() { return _position; };
-    Vect3f& velocity() { return _velocity; };
-    Vect3f& acceleration() { return _acceleration; }
     Vect3f& force()    { return _force; };
-    double& density()  { return _density; };
-    double& pressure() { return _pressure; };
     bool& flag() { return _flag; };
     int& id() { return _id; };
 };

@@ -44,9 +44,11 @@ public:
     void update();
     std::list<Wall> & getWalls();
     std::vector<Particle *> & operator()(int x, int y, int z);
+    std::vector<Particle *> * getNeighborParticles(Particle & particle);
     std::vector<Particle *> * particles() {return _particles;};
-
+    
 protected:
+    void addParticleForCellId(std::vector<Particle *> &particles, int posx, int posy, int posz);
     int newPosition(float value, int min, int max) const;
 };
 

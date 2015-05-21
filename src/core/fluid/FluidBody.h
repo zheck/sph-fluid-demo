@@ -26,7 +26,7 @@ public:
 
     FluidBody & operator=(FluidBody const & rhs);
 
-    std::list<Particle *> & getParticles();
+    std::list<Particle *> & particles();
     void addParticle(Particle *particle);
 };
 

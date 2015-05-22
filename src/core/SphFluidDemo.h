@@ -20,6 +20,7 @@
 #include "UniformGrid.h"
 #include "Particle.h"
 #include "Glass.h"
+#include "SphDemoRender.h"
 
 class SphFluidDemo : public Singleton<SphFluidDemo>
 {
@@ -29,6 +30,7 @@ public:
     FluidBody fluidBody;
     Glass *glass;
     UniformGrid uniformGrid;
+    SphDemoRender render;
     
 public:
     SphFluidDemo();
@@ -41,6 +43,7 @@ public:
     void draw();
     
 protected:
+    void generateParticles();
     void step1();
     void step2();
     void collisions(Particle * particle);

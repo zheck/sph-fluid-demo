@@ -24,23 +24,23 @@ DebugRender::~DebugRender()
 
 void DebugRender::render()
 {
-//    glMatrixMode(GL_PROJECTION);
-//    glPushMatrix();
-//    glLoadIdentity();
-//
-//    gluOrtho2D(0.0, 800.0, 600.0, 0.0);
-//    glColor3f(1.0f, 0.0f, 0.0f);
-//
-//    glRasterPos2i(10, 20);
-//    print("Eye position: " + SphFluidDemo::instance()->camera.getEye().getPosition());
-//
-//    glRasterPos2i(10, 30);
-//    print("Target position: " + SphFluidDemo::instance()->camera.getTarget().getPosition());
-//
-//    glRasterPos2i(10, 40);
-//    showNumberOfParticle(SphFluidDemo::instance()->fluidBody.getParticles().size());
-//
-//    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+
+    gluOrtho2D(0.0, 800.0, 600.0, 0.0);
+    glColor3f(1.0f, 0.0f, 0.0f);
+
+    glRasterPos2i(10, 20);
+    print("Eye position: " + SphFluidDemo::instance()->camera.getEye().getPosition());
+
+    glRasterPos2i(10, 30);
+    print("Angle: " + std::to_string(SphFluidDemo::instance()->camera.getAngle()));
+
+    glRasterPos2i(10, 40);
+    print("Target position: " + SphFluidDemo::instance()->camera.getTarget().getPosition());
+
+    glPopMatrix();
 }
 
 void DebugRender::print(std::string str)

@@ -12,16 +12,17 @@
 #include <stdio.h>
 #include <vector>
 
-#include "Particle.h"
+#include "FluidBody.h"
+#include "Glass.h"
 #include "ParticleRender.h"
 #include "DebugRender.h"
-#include "GridRender.h"
+#include "GlassRender.h"
 
 class SphDemoRender
 {
     ParticleRender _particleRender;
     DebugRender _debugRender;
-    GridRender _gridRender;
+    GlassRender _glassRender;
 
 public:
     SphDemoRender();
@@ -31,7 +32,7 @@ public:
     SphDemoRender & operator=(SphDemoRender const & rhs);
 
     void init();
-    void render();
+    void render(FluidBody & fluidBody, Glass & glass);
 };
 
 #endif /* defined(__sph_fluid__SphDemoRender__) */

@@ -21,7 +21,7 @@ class Camera
     float _fovy;
     float _angle;
     float _verticalAngle;
-    int _distance;
+    float _distance;
 
 public:
     Camera(float angle, float distance, float fovy);
@@ -35,8 +35,9 @@ public:
     void verticalRotate(float angle);
     void zoomIn();
     void zoomOut();
-    Vect3f getEye();
-    Vect3f getTarget();
+    Vect3f getEye() const;
+    Vect3f getTarget() const;
+    float getAngle() const;
 
 private:
     void setCamera();

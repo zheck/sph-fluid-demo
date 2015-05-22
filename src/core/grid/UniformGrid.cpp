@@ -14,7 +14,7 @@ _origin(origin),
 _dimension(dimension)
 {
     _numberOfCell = _dimension.x * _dimension.y * _dimension.z;
-    _particles = new std::vector<Particle *>[_numberOfCell];
+    _particles = new std::list<Particle *>[_numberOfCell];
 }
 
 UniformGrid::~UniformGrid()
@@ -39,7 +39,7 @@ int UniformGrid::numberOfCell() const
     return _numberOfCell;
 }
 
-std::vector<Particle *> & UniformGrid::operator()(int x, int y, int z)
+std::list<Particle *> & UniformGrid::operator()(int x, int y, int z)
 {
     return _particles[x + y * (int)_dimension.x + z * (int)_dimension.x * (int)_dimension.y];
 }
@@ -47,7 +47,7 @@ std::vector<Particle *> & UniformGrid::operator()(int x, int y, int z)
 void UniformGrid::update()
 {
     for (int i = 0; i < _numberOfCell; ++i) {
-        for (std::vector<Particle *>::iterator it = _particles[i].begin(); it != _particles[i].end(); ++it) {
+        for (std::list<Particle *>::iterator it = _particles[i].begin(); it != _particles[i].end(); ++it) {
             Vect3f position = (*it)->position;
             int newGridCellX = newPosition((*it)->position.x, 0, _dimension.x);
             int newGridCellY = newPosition((*it)->position.y, 0, _dimension.y);
@@ -82,8 +82,8 @@ std::list<Particle *> * UniformGrid::getNeighborParticles(Particle & particle)
                 if (posz+k < 0 || posz+k >= _dimension.z)
                     continue;
 
-                std::vector<Particle *>& neighborParticles = this->operator()(posx+i, posy+j, posz+k);
-                for (std::vector<Particle *>::iterator it = neighborParticles.begin(); it != neighborParticles.end(); ++it) {
+                std::list<Particle *>& neighborParticles = this->operator()(posx+i, posy+j, posz+k);
+                for (std::list<Particle *>::iterator it = neighborParticles.begin(); it != neighborParticles.end(); ++it) {
                     neighbors->push_back(*it);
                 }
             }

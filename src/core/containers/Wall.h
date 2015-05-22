@@ -15,21 +15,18 @@
 
 class Wall
 {
-    Vect3f _center;
-    Vect3f _normal;
-    float _size;
-    
+public:
+    Vect3f center;
+    Vect3f normal;
+    float size;
+    float thickness;
+
 public:
     Wall(Vect3f const & center, Vect3f const & normal);
     Wall(Wall const & rhs);
     ~Wall();
     
     Wall & operator=(Wall const & rhs);
-    
-    Vect3f & normal();
-    Vect3f & center();
-    
-    void draw();
 };
 
 #endif /* defined(__sph_fluid__Wall__) */

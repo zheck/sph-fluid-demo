@@ -16,7 +16,7 @@
 		4893AE671A86D47B0079DF2C /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE4D1A86D47B0079DF2C /* Wall.cpp */; };
 		4893AE691A86D47B0079DF2C /* Vect3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE521A86D47B0079DF2C /* Vect3f.cpp */; };
 		4893AE6C1A86D47B0079DF2C /* DebugRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE591A86D47B0079DF2C /* DebugRender.cpp */; };
-		4893AE6D1A86D47B0079DF2C /* GridRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5B1A86D47B0079DF2C /* GridRender.cpp */; };
+		4893AE6D1A86D47B0079DF2C /* GlassRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5B1A86D47B0079DF2C /* GlassRender.cpp */; };
 		4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */; };
 		4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */; };
 		489A61321A331897008FA731 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489A61311A331897008FA731 /* GLUT.framework */; };
@@ -58,8 +58,8 @@
 		4893AE531A86D47B0079DF2C /* Vect3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vect3f.h; sourceTree = "<group>"; };
 		4893AE591A86D47B0079DF2C /* DebugRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebugRender.cpp; sourceTree = "<group>"; };
 		4893AE5A1A86D47B0079DF2C /* DebugRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugRender.h; sourceTree = "<group>"; };
-		4893AE5B1A86D47B0079DF2C /* GridRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridRender.cpp; sourceTree = "<group>"; };
-		4893AE5C1A86D47B0079DF2C /* GridRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridRender.h; sourceTree = "<group>"; };
+		4893AE5B1A86D47B0079DF2C /* GlassRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlassRender.cpp; sourceTree = "<group>"; };
+		4893AE5C1A86D47B0079DF2C /* GlassRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlassRender.h; sourceTree = "<group>"; };
 		4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleRender.cpp; sourceTree = "<group>"; };
 		4893AE5E1A86D47B0079DF2C /* ParticleRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleRender.h; sourceTree = "<group>"; };
 		4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphDemoRender.cpp; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 			children = (
 				4893AE591A86D47B0079DF2C /* DebugRender.cpp */,
 				4893AE5A1A86D47B0079DF2C /* DebugRender.h */,
-				4893AE5B1A86D47B0079DF2C /* GridRender.cpp */,
-				4893AE5C1A86D47B0079DF2C /* GridRender.h */,
+				4893AE5B1A86D47B0079DF2C /* GlassRender.cpp */,
+				4893AE5C1A86D47B0079DF2C /* GlassRender.h */,
 				4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */,
 				4893AE5E1A86D47B0079DF2C /* ParticleRender.h */,
 				4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */,
@@ -276,7 +276,7 @@
 				4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */,
 				48DB00001B0F2A9600AEF565 /* UniformGrid.cpp in Sources */,
 				48DBFFEB1B0E247000AEF565 /* main.cpp in Sources */,
-				4893AE6D1A86D47B0079DF2C /* GridRender.cpp in Sources */,
+				4893AE6D1A86D47B0079DF2C /* GlassRender.cpp in Sources */,
 				4893AE691A86D47B0079DF2C /* Vect3f.cpp in Sources */,
 				4893AE671A86D47B0079DF2C /* Wall.cpp in Sources */,
 				488A4C761B0E7190009F6732 /* Glass.cpp in Sources */,

@@ -10,35 +10,9 @@
 #include "Particle.h"
 #include "config.h"
 
-Particle::Particle(const Vect3f& pos, int particleId) :
+Particle::Particle(const Vect3f& pos) :
 position(pos)
-{
-    myQuadric = NULL;
-    _id = particleId;
-}
+{}
 
 Particle::~Particle()
 {}
-
-void Particle::draw()
-{
-    glPushMatrix();
-    
-    glColor3f(0.01, 0.26, 1.0);
-    glTranslated(position.x, position.y, position.z);
-    glutSolidSphere(PARTICLE_RENDER_RADIUS, 10, 10);
-    
-    glPopMatrix();
-}
-
-//#include "Particle.h"
-//
-//Particle::Particle(Vect3f const & pos) :
-//position(pos),
-//velocity(0, 0, 0)
-//{
-//}
-//
-//Particle::~Particle()
-//{
-//}

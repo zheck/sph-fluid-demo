@@ -13,30 +13,35 @@ SphFluidDemo::SphFluidDemo() :
 camera(CAMERA_ANGLE, CAMERA_DISTANCE, 70),
 uniformGrid(Vect3f(0, 0, 0), Vect3f(GRID_SIZE, GRID_SIZE, GRID_SIZE))
 {
-    glass = new Glass(Vect3f(0, 0, 0), Vect3f(0.4, 0.4, 0.4));
+    glass = new Glass(Vect3f(0, 0, 0), Vect3f(GLASS_SIDE_SIZE, GLASS_SIDE_SIZE, GLASS_SIDE_SIZE));
     camera.init(glass->center(), Vect3f(0, 1, 0));
+    generateParticles();
+    uniformGrid.update();
+}
 
+SphFluidDemo::~SphFluidDemo()
+{}
+
+void SphFluidDemo::generateParticles()
+{
     int numberOfParticle = 0;
-    for (float x = glass->origin().x; x < (glass->origin().x + glass->dimension().x); x += PARTICLE_RADIUS / 2) {
-        for (float z = glass->origin().z; z < uniformGrid.origin().z + glass->dimension().z; z += PARTICLE_RADIUS / 2) {
-            for (float y = glass->origin().y; y < uniformGrid.origin().y + glass->dimension().y; y += PARTICLE_RADIUS / 2) {
-#warning dirty
+
+
+        for (float x = glass->origin().x; x < (glass->origin().x + glass->dimension().x); x += PARTICLE_RADIUS / 2) {
+            for (float z = glass->origin().z; z < uniformGrid.origin().z + glass->dimension().z; z += PARTICLE_RADIUS / 2) {
+                for (float y = glass->origin().y; y < uniformGrid.origin().y + glass->dimension().y; y += PARTICLE_RADIUS / 2) {
+
                 if (numberOfParticle > MAX_PARTICLE) {
-                    break;
+                    return;
                 }
-                Particle *p = new Particle(Vect3f(x, y, z), numberOfParticle);
+                Particle *p = new Particle(Vect3f(x, y, z));
                 uniformGrid(0, 0, 0).push_back(p);
                 fluidBody.addParticle(p);
                 ++numberOfParticle;
             }
         }
     }
-
-    uniformGrid.update();
 }
-
-SphFluidDemo::~SphFluidDemo()
-{}
 
 void SphFluidDemo::update()
 {
@@ -104,7 +109,7 @@ void SphFluidDemo::step2()
         if (colorFieldNormalMagnitude > SURFACE_THRESHOLD) {
             f_surface = -SURFACE_TENSION * colorField / colorFieldNormalMagnitude * colorFieldLaplacian;
         }
-        (*particle)->acceleration = (f_pressure + f_viscosity + f_surface + f_gravity) / (*particle)->density;
+        (*particle)->acceleration = (f_pressure + f_viscosity + f_gravity) / (*particle)->density;
         collisions(*particle);
         neighborParticles->clear();
         delete neighborParticles;
@@ -114,41 +119,18 @@ void SphFluidDemo::step2()
 void SphFluidDemo::collisions(Particle * particle) {
     std::list<Wall> walls = glass->getWalls();
     for (std::list<Wall>::iterator it = walls.begin(); it != walls.end(); ++it) {
-        Vect3f center = (*it).center();
-        Vect3f normal = (*it).normal();
+        Vect3f center = (*it).center;
+        Vect3f normal = (*it).normal;
         float f = (center - particle->position).dot(normal) + 0.01;
         
         if (f > 0.0) {
-            particle->acceleration += WALL_RESISTANCE * normal * f;
-            particle->acceleration += WALL_DAMPING * particle->velocity.dot(normal) * normal;
+            particle->acceleration += GLASS_RESISTANCE * normal * f;
+            particle->acceleration += GLASS_DAMPING * particle->velocity.dot(normal) * normal;
         }
     }
 }
 
 void SphFluidDemo::draw()
 {
-    static Vect3f blackColor(0,0,0);
-    static Vect3f blueColor(0,0,1);
-    static Vect3f whiteColor(1,1,1);
-    static Vect3f greyColor(0.2, 0.2, 0.2);
-    static Vect3f lightGreyColor(0.8,0.8,0.8);
-
-    glEnable(GL_LIGHTING);
-    
-    for (int gridCellIndex = 0; gridCellIndex < uniformGrid.numberOfCell(); gridCellIndex++) {
-        std::vector<Particle *>& particles = uniformGrid.particles()[gridCellIndex];
-        for (int p = 0; p < particles.size(); p++) {
-            Particle * particle = particles[p];
-            particle->draw();
-        }
-    }
-    glDisable(GL_LIGHTING);
-
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslatef(glass->center().x, glass->center().y, glass->center().z);
-    glScaled(glass->dimension().x, glass->dimension().y, glass->dimension().z);
-    glutWireCube(1.0);
-    glPopMatrix();
+    render.render(fluidBody, *glass);
 }

@@ -10,7 +10,6 @@
 #define __sph_fluid__UniformGrid__
 
 #include <stdio.h>
-#include <vector>
 #include <list>
 
 #include "Vect3f.h"
@@ -20,7 +19,7 @@ class UniformGrid
 {
     Vect3f _origin;
     Vect3f _dimension;
-    std::vector<Particle *> * _particles;
+    std::list<Particle *> * _particles;
     int _numberOfCell;
 
 public:
@@ -29,14 +28,13 @@ public:
     ~UniformGrid();
 
     UniformGrid & operator=(UniformGrid const & rhs);
-    std::vector<Particle *> & operator()(int x, int y, int z);
+    std::list<Particle *> & operator()(int x, int y, int z);
 
     Vect3f origin() const;
     Vect3f dimension() const;
     int numberOfCell() const;
     void update();
     std::list<Particle *> * getNeighborParticles(Particle & particle);
-    std::vector<Particle *> * particles() {return _particles;};
 
 protected:
     int newPosition(float value, int min, int max) const;

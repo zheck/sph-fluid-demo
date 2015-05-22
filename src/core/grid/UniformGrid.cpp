@@ -1,74 +1,50 @@
 //
-//  Grid.cpp
+//  UniformGrid.cpp
 //  sph-fluid
 //
-//  Created by zhou on 1/24/15.
+//  Created by zhou on 5/21/15.
 //  Copyright (c) 2015 zhou. All rights reserved.
 //
 
-#include <algorithm>
-
-#include "Grid.h"
 #include "config.h"
+#include "UniformGrid.h"
 
-Grid::Grid(Vect3f const & origin, Vect3f const & dimension) :
+UniformGrid::UniformGrid(Vect3f const & origin, Vect3f const & dimension) :
 _origin(origin),
 _dimension(dimension)
 {
     _numberOfCell = _dimension.x * _dimension.y * _dimension.z;
     _particles = new std::vector<Particle *>[_numberOfCell];
-
-    boxSize.x = BOX_SIZE;
-    boxSize.y = BOX_SIZE;
-    boxSize.z = BOX_SIZE;
-    _center = (_origin + boxSize + _origin) * 0.5;
-
-    _walls.push_back(Wall(Vect3f(_center.x, _center.y, _origin.z), Vect3f(0, 0, 1))); // back
-    _walls.push_back(Wall(Vect3f(_center.x, _center.y, _origin.z + boxSize.z), Vect3f(0, 0, -1))); // front
-    _walls.push_back(Wall(Vect3f(_origin.x, _center.y, _center.z), Vect3f(1, 0, 0))); // left
-    _walls.push_back(Wall(Vect3f(_origin.x + boxSize.x, _center.y, _center.z), Vect3f(-1, 0, 0))); // right
-    _walls.push_back(Wall(Vect3f(_center.x, _origin.y, _center.z), Vect3f(0, 1, 0))); // bottom
 }
 
-Grid::~Grid()
+UniformGrid::~UniformGrid()
 {
     for (int i = 0; i < _numberOfCell; ++i) {
         _particles[i].clear();
     }
-    _walls.clear();
 }
 
-Vect3f Grid::origin() const
+Vect3f UniformGrid::origin() const
 {
     return _origin;
 }
 
-Vect3f Grid::center() const
-{
-    return _center;
-}
-
-Vect3f Grid::dimension() const
+Vect3f UniformGrid::dimension() const
 {
     return _dimension;
 }
 
-int Grid::numberOfCell() const
+int UniformGrid::numberOfCell() const
 {
     return _numberOfCell;
 }
 
-std::vector<Particle *> & Grid::operator()(int x, int y, int z)
+std::vector<Particle *> & UniformGrid::operator()(int x, int y, int z)
 {
     return _particles[x + y * (int)_dimension.x + z * (int)_dimension.x * (int)_dimension.y];
 }
 
-std::list<Wall> & Grid::getWalls()
-{
-    return _walls;
-}
-
-void Grid::update()
+void UniformGrid::update()
 {
     for (int i = 0; i < _numberOfCell; ++i) {
         for (std::vector<Particle *>::iterator it = _particles[i].begin(); it != _particles[i].end(); ++it) {
@@ -87,21 +63,21 @@ void Grid::update()
     }
 }
 
-std::vector<Particle *> * Grid::getNeighborParticles(Particle & particle)
+std::vector<Particle *> * UniformGrid::getNeighborParticles(Particle & particle)
 {
     std::vector<Particle *> *neighbors = new std::vector<Particle *>();
     int posx = (int)floor(particle.position.x / PARTICLE_RADIUS);
     int posy = (int)floor(particle.position.y / PARTICLE_RADIUS);
     int posz = (int)floor(particle.position.z / PARTICLE_RADIUS);
-    
+
     for (int i = -1; i <= 1; ++i) {
         if (posx + i < 0 || posx + i > GRID_SIZE)
             continue;
-        
+
         for (int j = -1; j <= 1; ++j) {
             if (posy + j < 0 || posy + j > GRID_SIZE)
                 continue;
-            
+
             for (int k = -1; k <= 1; ++k) {
                 if (posz + k < 0 || posz + k > GRID_SIZE)
                     continue;
@@ -109,11 +85,11 @@ std::vector<Particle *> * Grid::getNeighborParticles(Particle & particle)
             }
         }
     }
-    
+
     return neighbors;
 }
 
-void Grid::addParticleForCellId(std::vector<Particle *> &particles, int posx, int posy, int posz)
+void UniformGrid::addParticleForCellId(std::vector<Particle *> &particles, int posx, int posy, int posz)
 {
     int cellId = posx + posy * GRID_SIZE + posz * GRID_SIZE * GRID_SIZE;
     if (cellId < 0 || cellId > GRID_SIZE) {
@@ -124,7 +100,7 @@ void Grid::addParticleForCellId(std::vector<Particle *> &particles, int posx, in
     }
 }
 
-int Grid::newPosition(float value, int min, int max) const
+int UniformGrid::newPosition(float value, int min, int max) const
 {
     int res = (int)floor(value / PARTICLE_RADIUS);
     if (res < min) {
@@ -136,7 +112,6 @@ int Grid::newPosition(float value, int min, int max) const
 
     return res;
 }
-
 //std::list<Particle *> * Grid::getNeighborParticles(Particle & particle)
 //{
 //    std::list<Particle *> *neighbors = new std::list<Particle *>();
@@ -173,4 +148,3 @@ int Grid::newPosition(float value, int min, int max) const
 //        particles.push_back(*it);
 //    }
 //}
-

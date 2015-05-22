@@ -13,7 +13,6 @@
 #include <list>
 
 #include "Particle.h"
-#include "Grid.h"
 
 class FluidBody
 {

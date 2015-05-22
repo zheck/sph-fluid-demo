@@ -7,7 +7,6 @@
 //
 
 #include "FluidBody.h"
-#include "Grid.h"
 
 FluidBody::FluidBody()
 {}

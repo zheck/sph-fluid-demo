@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		485F43181B0742BF009E70DE /* sph_formulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 485F43161B0742BF009E70DE /* sph_formulas.cpp */; };
 		487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487A89CB1A3302EE00B76BA9 /* OpenGL.framework */; };
-		488A4C731B0E7184009F6732 /* UniformGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 488A4C711B0E7184009F6732 /* UniformGrid.cpp */; };
 		488A4C761B0E7190009F6732 /* Glass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 488A4C741B0E7190009F6732 /* Glass.cpp */; };
 		4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE431A86D47B0079DF2C /* Camera.cpp */; };
 		4893AE641A86D47B0079DF2C /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE451A86D47B0079DF2C /* Keyboard.cpp */; };
 		4893AE651A86D47B0079DF2C /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE471A86D47B0079DF2C /* Mouse.cpp */; };
-		4893AE661A86D47B0079DF2C /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE4B1A86D47B0079DF2C /* Grid.cpp */; };
 		4893AE671A86D47B0079DF2C /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE4D1A86D47B0079DF2C /* Wall.cpp */; };
 		4893AE691A86D47B0079DF2C /* Vect3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE521A86D47B0079DF2C /* Vect3f.cpp */; };
 		4893AE6C1A86D47B0079DF2C /* DebugRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE591A86D47B0079DF2C /* DebugRender.cpp */; };
@@ -22,6 +20,7 @@
 		4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */; };
 		4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */; };
 		489A61321A331897008FA731 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489A61311A331897008FA731 /* GLUT.framework */; };
+		48DB00001B0F2A9600AEF565 /* UniformGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48DBFFFE1B0F2A9600AEF565 /* UniformGrid.cpp */; };
 		48DBFFEB1B0E247000AEF565 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48DBFFEA1B0E247000AEF565 /* main.cpp */; };
 		48DBFFEE1B0E259A00AEF565 /* SphFluidDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48DBFFEC1B0E259A00AEF565 /* SphFluidDemo.cpp */; };
 		48DBFFFB1B0E25ED00AEF565 /* FluidBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48DBFFF71B0E25ED00AEF565 /* FluidBody.cpp */; };
@@ -44,8 +43,6 @@
 		485F43161B0742BF009E70DE /* sph_formulas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_formulas.cpp; sourceTree = "<group>"; };
 		485F43171B0742BF009E70DE /* sph_formulas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sph_formulas.h; sourceTree = "<group>"; };
 		487A89CB1A3302EE00B76BA9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		488A4C711B0E7184009F6732 /* UniformGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformGrid.cpp; sourceTree = "<group>"; };
-		488A4C721B0E7184009F6732 /* UniformGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniformGrid.h; sourceTree = "<group>"; };
 		488A4C741B0E7190009F6732 /* Glass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Glass.cpp; sourceTree = "<group>"; };
 		488A4C751B0E7190009F6732 /* Glass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Glass.h; sourceTree = "<group>"; };
 		4893AE411A86D47B0079DF2C /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -55,8 +52,6 @@
 		4893AE461A86D47B0079DF2C /* Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyboard.h; sourceTree = "<group>"; };
 		4893AE471A86D47B0079DF2C /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mouse.cpp; sourceTree = "<group>"; };
 		4893AE481A86D47B0079DF2C /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
-		4893AE4B1A86D47B0079DF2C /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
-		4893AE4C1A86D47B0079DF2C /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		4893AE4D1A86D47B0079DF2C /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		4893AE4E1A86D47B0079DF2C /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		4893AE521A86D47B0079DF2C /* Vect3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vect3f.cpp; sourceTree = "<group>"; };
@@ -79,6 +74,8 @@
 		48DBFFF81B0E25ED00AEF565 /* FluidBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FluidBody.h; sourceTree = "<group>"; };
 		48DBFFF91B0E25ED00AEF565 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		48DBFFFA1B0E25ED00AEF565 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		48DBFFFE1B0F2A9600AEF565 /* UniformGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformGrid.cpp; sourceTree = "<group>"; };
+		48DBFFFF1B0F2A9600AEF565 /* UniformGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniformGrid.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +131,7 @@
 				48DBFFEC1B0E259A00AEF565 /* SphFluidDemo.cpp */,
 				48DBFFED1B0E259A00AEF565 /* SphFluidDemo.h */,
 				48DBFFE61B0E22C900AEF565 /* fluid */,
+				48DBFFFD1B0F2A9600AEF565 /* grid */,
 				4893AE4A1A86D47B0079DF2C /* containers */,
 				4893AE511A86D47B0079DF2C /* maths */,
 				48DBFFE71B0E230900AEF565 /* utils */,
@@ -144,12 +142,8 @@
 		4893AE4A1A86D47B0079DF2C /* containers */ = {
 			isa = PBXGroup;
 			children = (
-				4893AE4B1A86D47B0079DF2C /* Grid.cpp */,
-				4893AE4C1A86D47B0079DF2C /* Grid.h */,
 				4893AE4D1A86D47B0079DF2C /* Wall.cpp */,
 				4893AE4E1A86D47B0079DF2C /* Wall.h */,
-				488A4C711B0E7184009F6732 /* UniformGrid.cpp */,
-				488A4C721B0E7184009F6732 /* UniformGrid.h */,
 				488A4C741B0E7190009F6732 /* Glass.cpp */,
 				488A4C751B0E7190009F6732 /* Glass.h */,
 			);
@@ -211,6 +205,15 @@
 			path = ../utils;
 			sourceTree = "<group>";
 		};
+		48DBFFFD1B0F2A9600AEF565 /* grid */ = {
+			isa = PBXGroup;
+			children = (
+				48DBFFFE1B0F2A9600AEF565 /* UniformGrid.cpp */,
+				48DBFFFF1B0F2A9600AEF565 /* UniformGrid.h */,
+			);
+			path = grid;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -268,13 +271,12 @@
 				48DBFFEE1B0E259A00AEF565 /* SphFluidDemo.cpp in Sources */,
 				4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */,
 				4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */,
-				488A4C731B0E7184009F6732 /* UniformGrid.cpp in Sources */,
 				4893AE641A86D47B0079DF2C /* Keyboard.cpp in Sources */,
 				48DBFFFB1B0E25ED00AEF565 /* FluidBody.cpp in Sources */,
 				4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */,
+				48DB00001B0F2A9600AEF565 /* UniformGrid.cpp in Sources */,
 				48DBFFEB1B0E247000AEF565 /* main.cpp in Sources */,
 				4893AE6D1A86D47B0079DF2C /* GridRender.cpp in Sources */,
-				4893AE661A86D47B0079DF2C /* Grid.cpp in Sources */,
 				4893AE691A86D47B0079DF2C /* Vect3f.cpp in Sources */,
 				4893AE671A86D47B0079DF2C /* Wall.cpp in Sources */,
 				488A4C761B0E7190009F6732 /* Glass.cpp in Sources */,

@@ -11,26 +11,27 @@
 
 SphFluidDemo::SphFluidDemo() :
 camera(CAMERA_ANGLE, CAMERA_DISTANCE, 70),
-grid(Vect3f(0, 0, 0), Vect3f(10, 10, 10))
+uniformGrid(Vect3f(0, 0, 0), Vect3f(GRID_SIZE, GRID_SIZE, GRID_SIZE))
 {
-    camera.init(grid.center(), Vect3f(0, 1, 0));
+    glass = new Glass(Vect3f(0, 0, 0), Vect3f(0.4, 0.4, 0.4));
+    camera.init(glass->center(), Vect3f(0, 1, 0));
 
     int numberOfParticle = 0;
-    for (float x = grid.origin().x; x < (grid.origin().x + grid.boxSize.x); x += PARTICLE_RADIUS / 2) {
-        for (float z = grid.origin().z; z < grid.origin().z + grid.boxSize.z; z += PARTICLE_RADIUS / 2) {
-            for (float y = grid.origin().y; y < grid.origin().y + grid.boxSize.y; y += PARTICLE_RADIUS / 2) {
+    for (float x = glass->origin().x; x < (glass->origin().x + glass->dimension().x); x += PARTICLE_RADIUS / 2) {
+        for (float z = glass->origin().z; z < uniformGrid.origin().z + glass->dimension().z; z += PARTICLE_RADIUS / 2) {
+            for (float y = glass->origin().y; y < uniformGrid.origin().y + glass->dimension().y; y += PARTICLE_RADIUS / 2) {
                 if (numberOfParticle > MAX_PARTICLE) {
                     break;
                 }
                 Particle *p = new Particle(Vect3f(x, y, z), numberOfParticle);
-                grid(0, 0, 0).push_back(p);
+                uniformGrid(0, 0, 0).push_back(p);
                 fluidBody.addParticle(p);
                 ++numberOfParticle;
             }
         }
     }
 
-    grid.update();
+    uniformGrid.update();
 }
 
 SphFluidDemo::~SphFluidDemo()
@@ -50,7 +51,7 @@ void SphFluidDemo::update()
         (*it)->velocity = newVelocity;
     }
 
-    grid.update();
+    uniformGrid.update();
 }
 
 //void SphFluidDemo::step1()
@@ -84,27 +85,27 @@ void SphFluidDemo::step1()
 //        neighborParticles->clear();
 //        delete neighborParticles;
 //    }
-    for (int x = 0; x < grid.dimension().x; x++) {
-        for (int y = 0; y < grid.dimension().y; y++) {
-            for (int z = 0; z < grid.dimension().z; z++) {
-                std::vector<Particle *>& particles = grid(x,y,z);
+    for (int x = 0; x < uniformGrid.dimension().x; x++) {
+        for (int y = 0; y < uniformGrid.dimension().y; y++) {
+            for (int z = 0; z < uniformGrid.dimension().z; z++) {
+                std::vector<Particle *>& particles = uniformGrid(x,y,z);
                 for (int p = 0; p < particles.size(); p++) {
                     Particle * particle = particles[p];
                     float kernels = 0.0;
                     
                     for (int offsetX = -1; offsetX <= 1; offsetX++) {
                         if (x+offsetX < 0) continue;
-                        if (x+offsetX >= grid.dimension().x) break;
+                        if (x+offsetX >= uniformGrid.dimension().x) break;
                         
                         for (int offsetY = -1; offsetY <= 1; offsetY++) {
                             if (y+offsetY < 0) continue;
-                            if (y+offsetY >= grid.dimension().y) break;
+                            if (y+offsetY >= uniformGrid.dimension().y) break;
                             
                             for (int offsetZ = -1; offsetZ <= 1; offsetZ++) {
                                 if (z+offsetZ < 0) continue;
-                                if (z+offsetZ >= grid.dimension().z) break;
+                                if (z+offsetZ >= uniformGrid.dimension().z) break;
                                 
-                                std::vector<Particle *>& neighborGridCellParticles = grid(x+offsetX, y+offsetY, z+offsetZ);
+                                std::vector<Particle *>& neighborGridCellParticles = uniformGrid(x+offsetX, y+offsetY, z+offsetZ);
                                 
                                 for (int i = 0; i < neighborGridCellParticles.size(); i++) {
                                     Particle * neighborParticle = neighborGridCellParticles[i];
@@ -125,10 +126,10 @@ void SphFluidDemo::step1()
 
 void SphFluidDemo::step2()
 {
-    for (int x = 0; x < grid.dimension().x; x++) {
-        for (int y = 0; y < grid.dimension().y; y++) {
-            for (int z = 0; z < grid.dimension().z; z++) {
-                std::vector<Particle *>& particles = grid(x,y,z);
+    for (int x = 0; x < uniformGrid.dimension().x; x++) {
+        for (int y = 0; y < uniformGrid.dimension().y; y++) {
+            for (int z = 0; z < uniformGrid.dimension().z; z++) {
+                std::vector<Particle *>& particles = uniformGrid(x,y,z);
                 for (int p = 0; p < particles.size(); p++) {
                     Particle * particle = particles[p];
                     Vect3f f_pressure,
@@ -141,17 +142,17 @@ void SphFluidDemo::step2()
                     
                     for (int offsetX = -1; offsetX <= 1; offsetX++) {
                         if (x+offsetX < 0) continue;
-                        if (x+offsetX >= grid.dimension().x) break;
+                        if (x+offsetX >= uniformGrid.dimension().x) break;
                         
                         for (int offsetY = -1; offsetY <= 1; offsetY++) {
                             if (y+offsetY < 0) continue;
-                            if (y+offsetY >= grid.dimension().y) break;
+                            if (y+offsetY >= uniformGrid.dimension().y) break;
                             
                             for (int offsetZ = -1; offsetZ <= 1; offsetZ++) {
                                 if (z+offsetZ < 0) continue;
-                                if (z+offsetZ >= grid.dimension().z) break;
+                                if (z+offsetZ >= uniformGrid.dimension().z) break;
                                 
-                                std::vector<Particle *>& neighborGridCellParticles = grid(x+offsetX, y+offsetY, z+offsetZ);
+                                std::vector<Particle *>& neighborGridCellParticles = uniformGrid(x+offsetX, y+offsetY, z+offsetZ);
                                 
                                 for (int i = 0; i < neighborGridCellParticles.size(); i++) {
                                     Particle * neighbor = neighborGridCellParticles[i];
@@ -194,7 +195,7 @@ void SphFluidDemo::step2()
 }
 
 void SphFluidDemo::collisions(Particle * particle) {
-    std::list<Wall> walls = grid.getWalls();
+    std::list<Wall> walls = glass->getWalls();
     for (std::list<Wall>::iterator it = walls.begin(); it != walls.end(); ++it) {
         Vect3f center = (*it).center();
         Vect3f normal = (*it).normal();
@@ -217,8 +218,8 @@ void SphFluidDemo::draw()
 
     glEnable(GL_LIGHTING);
     
-    for (int gridCellIndex = 0; gridCellIndex < grid.numberOfCell(); gridCellIndex++) {
-        std::vector<Particle *>& particles = grid.particles()[gridCellIndex];
+    for (int gridCellIndex = 0; gridCellIndex < uniformGrid.numberOfCell(); gridCellIndex++) {
+        std::vector<Particle *>& particles = uniformGrid.particles()[gridCellIndex];
         for (int p = 0; p < particles.size(); p++) {
             Particle * particle = particles[p];
             particle->draw();
@@ -229,8 +230,8 @@ void SphFluidDemo::draw()
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(grid.center().x, grid.center().y, grid.center().z);
-    glScaled(grid.boxSize.x, grid.boxSize.y, grid.boxSize.z);
+    glTranslatef(glass->center().x, glass->center().y, glass->center().z);
+    glScaled(glass->dimension().x, glass->dimension().y, glass->dimension().z);
     glutWireCube(1.0);
     glPopMatrix();
 }

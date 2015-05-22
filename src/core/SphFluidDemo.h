@@ -17,16 +17,18 @@
 #include "Camera.h"
 #include "Keyboard.h"
 #include "FluidBody.h"
-#include "Grid.h"
+#include "UniformGrid.h"
 #include "Particle.h"
+#include "Glass.h"
 
 class SphFluidDemo : public Singleton<SphFluidDemo>
 {
 public:
     Camera camera;
     Keyboard keyboard;
-    Grid grid;
     FluidBody fluidBody;
+    Glass *glass;
+    UniformGrid uniformGrid;
     
 public:
     SphFluidDemo();

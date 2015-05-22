@@ -43,7 +43,7 @@ static const float PARTICLE_VISCOSITY = 1.308;
 static const float WATER_STIFFNESS = 3.0;
 
 //
-static const int MAX_PARTICLE = 500;
+static const int MAX_PARTICLE = 900;
 
 //static const float ROTATION_SCALE = 0.1;
 //static const int ZOOM_SCALE = 1;

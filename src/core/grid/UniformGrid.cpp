@@ -63,41 +63,34 @@ void UniformGrid::update()
     }
 }
 
-std::vector<Particle *> * UniformGrid::getNeighborParticles(Particle & particle)
+std::list<Particle *> * UniformGrid::getNeighborParticles(Particle & particle)
 {
-    std::vector<Particle *> *neighbors = new std::vector<Particle *>();
-    int posx = (int)floor(particle.position.x / PARTICLE_RADIUS);
-    int posy = (int)floor(particle.position.y / PARTICLE_RADIUS);
-    int posz = (int)floor(particle.position.z / PARTICLE_RADIUS);
+    std::list<Particle *> *neighbors = new std::list<Particle *>();
+    int posx = particle.position.x / PARTICLE_RADIUS;
+    int posy = particle.position.y / PARTICLE_RADIUS;
+    int posz = particle.position.z / PARTICLE_RADIUS;
 
-    for (int i = -1; i <= 1; ++i) {
-        if (posx + i < 0 || posx + i > GRID_SIZE)
+    for (int i = -1; i <= 1; i++) {
+        if (posx+i < 0 || posx+i >= _dimension.x)
             continue;
 
-        for (int j = -1; j <= 1; ++j) {
-            if (posy + j < 0 || posy + j > GRID_SIZE)
+        for (int j = -1; j <= 1; j++) {
+            if (posy+j < 0 || posy+j >= _dimension.y)
                 continue;
 
-            for (int k = -1; k <= 1; ++k) {
-                if (posz + k < 0 || posz + k > GRID_SIZE)
+            for (int k = -1; k <= 1; k++) {
+                if (posz+k < 0 || posz+k >= _dimension.z)
                     continue;
-                addParticleForCellId(*neighbors, posx + i, posy + j, (posz + k));
+
+                std::vector<Particle *>& neighborParticles = this->operator()(posx+i, posy+j, posz+k);
+                for (std::vector<Particle *>::iterator it = neighborParticles.begin(); it != neighborParticles.end(); ++it) {
+                    neighbors->push_back(*it);
+                }
             }
         }
     }
 
     return neighbors;
-}
-
-void UniformGrid::addParticleForCellId(std::vector<Particle *> &particles, int posx, int posy, int posz)
-{
-    int cellId = posx + posy * GRID_SIZE + posz * GRID_SIZE * GRID_SIZE;
-    if (cellId < 0 || cellId > GRID_SIZE) {
-        return ;
-    }
-    for (std::vector<Particle *>::iterator it = _particles[cellId].begin(); it != _particles[cellId].end(); ++it) {
-        particles.push_back(*it);
-    }
 }
 
 int UniformGrid::newPosition(float value, int min, int max) const
@@ -112,39 +105,3 @@ int UniformGrid::newPosition(float value, int min, int max) const
 
     return res;
 }
-//std::list<Particle *> * Grid::getNeighborParticles(Particle & particle)
-//{
-//    std::list<Particle *> *neighbors = new std::list<Particle *>();
-//    Vect3f position = particle.position;
-//    int posx = (int)position.x;
-//    int posy = (int)position.y;
-//    int posz = (int)position.z;
-//
-//    for (int i = -1; i <= 1; ++i) {
-//        if (posx + i < 0 || posx + i > GRID_SIZE)
-//            continue;
-//
-//        for (int j = -1; j <= 1; ++j) {
-//            if (posy + j < 0 || posy + j > GRID_SIZE)
-//                continue;
-//
-//            for (int k = -1; k <= 1; ++k) {
-//                if (posz + k < 0 || posz + k > GRID_SIZE)
-//                    continue;
-//                addParticleForCellId(*neighbors, posx + i + (posy + j) * GRID_SIZE + (posz + k) * GRID_SIZE * GRID_SIZE);
-//            }
-//        }
-//    }
-//
-//    return neighbors;
-//}
-//
-//void Grid::addParticleForCellId(std::list<Particle *> &particles, int cellId)
-//{
-//    if (cellId < 0 || cellId > GRID_SIZE) {
-//        return ;
-//    }
-//    for (std::list<Particle *>::iterator it = _particles[cellId].begin(); it != _particles[cellId].end(); ++it) {
-//        particles.push_back(*it);
-//    }
-//}

@@ -20,6 +20,7 @@ uniformGrid(Vect3f(0, 0, 0), Vect3f(GRID_SIZE, GRID_SIZE, GRID_SIZE))
     for (float x = glass->origin().x; x < (glass->origin().x + glass->dimension().x); x += PARTICLE_RADIUS / 2) {
         for (float z = glass->origin().z; z < uniformGrid.origin().z + glass->dimension().z; z += PARTICLE_RADIUS / 2) {
             for (float y = glass->origin().y; y < uniformGrid.origin().y + glass->dimension().y; y += PARTICLE_RADIUS / 2) {
+#warning dirty
                 if (numberOfParticle > MAX_PARTICLE) {
                     break;
                 }
@@ -54,78 +55,63 @@ void SphFluidDemo::update()
     uniformGrid.update();
 }
 
-//void SphFluidDemo::step1()
-//{
-//    std::list<Particle *> particles = fluidBody.getParticles();
-//    for (std::list<Particle *>::iterator particle = particles.begin(); particle != particles.end(); ++particle) {
-//        float kernels = 0.0;
-//        std::list<Particle *> * neightborParticles = grid.getneighbor->Particles(**particle);
-//        for (std::list<Particle *>::iterator it = neightborParticles->begin(); it != neightborParticles->end(); ++it) {
-//            Vect3f distance = (*particle)->position - (*it)->position;
-//            kernels += wpoly6Kernel(distance.dot(distance));
-//        }
-//        (*particle)->density = kernels * PARTICLE_MASS;
-//        (*particle)->pressure = WATER_STIFFNESS * ((*particle)->density - PARTICLE_DENSITY_REST); //pressure = k(ρ − ρ0);
-//        neightborParticles->clear();
-//        delete neightborParticles;
-//    }
-//}
 // update density and pressure for each particle
 void SphFluidDemo::step1()
 {
-//    for (std::list<Particle *>::iterator particle = fluidBody.particles().begin(); particle != fluidBody.particles().end(); ++particle) {
-//        float kernels = 0.0;
-//        std::vector<Particle *> *neighborParticles = grid.getNeighborParticles(**particle);
-//        for (std::vector<Particle *>::iterator it = neighborParticles->begin(); it != neighborParticles->end(); ++it) {
-//            Vect3f distance = (*particle)->position - (*it)->position;
-//            kernels += wpoly6Kernel(distance.dot(distance));
-//        }
-//        (*particle)->density = kernels * PARTICLE_MASS;
-//        (*particle)->pressure = WATER_STIFFNESS * ((*particle)->density - PARTICLE_DENSITY_REST); //pressure = k(ρ − ρ0);
-//        neighborParticles->clear();
-//        delete neighborParticles;
-//    }
-    for (int x = 0; x < uniformGrid.dimension().x; x++) {
-        for (int y = 0; y < uniformGrid.dimension().y; y++) {
-            for (int z = 0; z < uniformGrid.dimension().z; z++) {
-                std::vector<Particle *>& particles = uniformGrid(x,y,z);
-                for (int p = 0; p < particles.size(); p++) {
-                    Particle * particle = particles[p];
-                    float kernels = 0.0;
-                    
-                    for (int offsetX = -1; offsetX <= 1; offsetX++) {
-                        if (x+offsetX < 0) continue;
-                        if (x+offsetX >= uniformGrid.dimension().x) break;
-                        
-                        for (int offsetY = -1; offsetY <= 1; offsetY++) {
-                            if (y+offsetY < 0) continue;
-                            if (y+offsetY >= uniformGrid.dimension().y) break;
-                            
-                            for (int offsetZ = -1; offsetZ <= 1; offsetZ++) {
-                                if (z+offsetZ < 0) continue;
-                                if (z+offsetZ >= uniformGrid.dimension().z) break;
-                                
-                                std::vector<Particle *>& neighborGridCellParticles = uniformGrid(x+offsetX, y+offsetY, z+offsetZ);
-                                
-                                for (int i = 0; i < neighborGridCellParticles.size(); i++) {
-                                    Particle * neighborParticle = neighborGridCellParticles[i];
-                                    Vect3f diffPosition = particle->position - neighborParticle->position;
-                                    kernels += wpoly6Kernel(diffPosition.dot(diffPosition));
-                                }
-                            }
-                        }
-                    }
-                    
-                    particle->density = kernels * PARTICLE_MASS;
-                    particle->pressure = WATER_STIFFNESS * (particle->density - PARTICLE_DENSITY_REST); //pressure = k(ρ − ρ0)
-                }
-            }
+    for (std::list<Particle *>::iterator particle = fluidBody.particles().begin(); particle != fluidBody.particles().end(); ++particle) {
+        float kernels = 0.0;
+
+        std::list<Particle *> * neighborParticles = uniformGrid.getNeighborParticles(**particle);
+        for (std::list<Particle *>::iterator it = neighborParticles->begin(); it != neighborParticles->end(); ++it) {
+            Vect3f diffPosition = (*particle)->position - (*it)->position;
+            kernels += wpoly6Kernel(diffPosition.dot(diffPosition));
         }
+
+        (*particle)->density = kernels * PARTICLE_MASS;
+        (*particle)->pressure = WATER_STIFFNESS * ((*particle)->density - PARTICLE_DENSITY_REST); //pressure = k(ρ − ρ0)
+        neighborParticles->clear();
+        delete neighborParticles;
     }
 }
-
+//    std::list<Particle *> particles = fluidBody.getParticles();
+//    for (std::list<Particle *>::iterator particle = particles.begin(); particle != particles.end(); ++particle) {
+//        std::list<Particle *> * neightborParticles = grid.getneighbor->Particles(**particle);
+//        Vect3f f_pressure, f_viscosity, f_surface, colorField;
+//        Vect3f f_gravity(0, GRAVITY, 0);
+//        float colorFieldLaplacian = 0.0;
+//
+//        for (std::list<Particle *>::iterator it = neightborParticles->begin(); it != neightborParticles->end(); ++it) {
+//            Vect3f distance = (*particle)->position - (*it)->position;
+//            float dotRadius = distance.dot(distance);
+//            if (dotRadius < PARTICLE_RADIUS_SQUARE) {
+//                Vect3f poly6Gradient = wpoly6KernelGradient(dotRadius, distance);
+//                Vect3f spikyGradient = spikyKernelGradient(dotRadius, distance);
+//                if (*it != *particle) {
+//                    f_pressure += noSymmetricalPressure((*particle)->pressure, (*particle)->density, (*it)->pressure, (*it)->density, spikyGradient);
+//                    f_viscosity += noSymmetricalViscosity((*particle)->velocity, (*it)->velocity, (*it)->density, viscosityKernel(dotRadius));
+//                }
+//                colorField += poly6Gradient / (*it)->density * PARTICLE_MASS;
+//                colorFieldLaplacian += wpoly6KernelSecond(dotRadius) / (*it)->density * PARTICLE_MASS;
+//            }
+//        }
+//
+//        (*particle)->normal = colorField * -1;
+//        float colorFieldNormalMagnitude = colorField.magnitude();
+//        if (colorFieldNormalMagnitude > SURFACE_THRESHOLD) {
+//            f_surface = colorField / colorFieldNormalMagnitude * colorFieldLaplacian * -SURFACE_TENSION;
+//        }
+//        (*particle)->acceleration = (f_pressure + f_viscosity + f_surface + f_gravity) / (*particle)->density;
+//        collisions(**particle);
+//
+//        neightborParticles->clear();
+//        delete neightborParticles;
+//    }
 void SphFluidDemo::step2()
 {
+    for (std::list<Particle *>::iterator particle = fluidBody.particles().begin(); particle != fluidBody.particles().end(); ++particle) {
+    
+    }
+
     for (int x = 0; x < uniformGrid.dimension().x; x++) {
         for (int y = 0; y < uniformGrid.dimension().y; y++) {
             for (int z = 0; z < uniformGrid.dimension().z; z++) {

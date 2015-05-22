@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <vector>
+#include <list>
 
 #include "Vect3f.h"
 #include "Particle.h"
@@ -34,11 +35,10 @@ public:
     Vect3f dimension() const;
     int numberOfCell() const;
     void update();
-    std::vector<Particle *> * getNeighborParticles(Particle & particle);
+    std::list<Particle *> * getNeighborParticles(Particle & particle);
     std::vector<Particle *> * particles() {return _particles;};
 
 protected:
-    void addParticleForCellId(std::vector<Particle *> &particles, int posx, int posy, int posz);
     int newPosition(float value, int min, int max) const;
 };
 

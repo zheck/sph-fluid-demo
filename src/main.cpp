@@ -10,14 +10,12 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
+#include <unistd.h>
 
 #include "SphFluidDemo.h"
 #include "config.h"
 
-void init(void)
-{
-    SphFluidDemo::instance()->init();
-}
+bool play = false;
 
 void keyboardCallback(unsigned char key, int x, int y)
 {
@@ -25,19 +23,24 @@ void keyboardCallback(unsigned char key, int x, int y)
         SphFluidDemo::kill();
         exit(0);
     }
+    if (key == 'p') {
+        play = true;
+    }
     SphFluidDemo::instance()->keyboard.update(key, x, y);
 }
 
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    SphFluidDemo::instance()->display();
+    SphFluidDemo::instance()->draw();
     glutSwapBuffers();
 }
 
 void idleCallback()
 {
-    SphFluidDemo::instance()->update();
+    if (play == true) {
+        SphFluidDemo::instance()->update();
+    }
     display();
 }
 
@@ -54,7 +57,6 @@ int main(int argc, char **argv)
     glutDisplayFunc(display);
 
     glClearColor(164, 164, 164, 1.0);
-    init();
 
     glutMainLoop();
 

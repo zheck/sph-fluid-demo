@@ -9,14 +9,21 @@
 #include "Wall.h"
 #include "config.h"
 
-Wall::Wall(Vect3f const & center, Vect3f const & normal)
+Wall::Wall(const Vect3f& c, const Vect3f& n)
 {
-    this->center = center;
-    this->normal = normal;
-    size = GRID_SIZE;
-    thickness = WALL_THICKNESS;
+    center = c;
+    normal = n;
+    size = GLASS_SIDE_SIZE;
+    thickness = GLASS_THICKNESS;
+}
+
+Wall::Wall(Wall const & rhs)
+{
+    center = rhs.center;
+    normal = rhs.normal;
+    size = rhs.size;
+    thickness = rhs.thickness;
 }
 
 Wall::~Wall()
-{
-}
+{}

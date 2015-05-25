@@ -9,26 +9,28 @@
 #ifndef __sph_fluid__SphFluidDemo__
 #define __sph_fluid__SphFluidDemo__
 
-#include <iostream>
 
+#include <vector>
+
+#include "config.h"
 #include "Singleton.h"
-#include "Keyboard.h"
 #include "Camera.h"
-#include "Mouse.h"
+#include "Keyboard.h"
 #include "FluidBody.h"
+#include "UniformGrid.h"
+#include "Particle.h"
+#include "Glass.h"
 #include "SphDemoRender.h"
-#include "Grid.h"
 
 class SphFluidDemo : public Singleton<SphFluidDemo>
 {
 public:
     Camera camera;
     Keyboard keyboard;
-    Mouse mouse;
-    Grid grid;
-
     FluidBody fluidBody;
-    SphDemoRender renderer;
+    Glass *glass;
+    UniformGrid uniformGrid;
+    SphDemoRender render;
 
 public:
     SphFluidDemo();
@@ -37,9 +39,13 @@ public:
 
     SphFluidDemo & operator=(SphFluidDemo const & rhs);
 
-    void init();
     void update();
-    void display();
+    void draw();
+
+protected:
+    void generateParticles();
+    void step1();
+    void step2();
 };
 
 #endif /* defined(__sph_fluid__SphFluidDemo__) */

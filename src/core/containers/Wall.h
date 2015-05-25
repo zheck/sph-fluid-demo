@@ -22,7 +22,7 @@ public:
     float thickness;
 
 public:
-    Wall(Vect3f const & origin, Vect3f const & center);
+    Wall(Vect3f const & center, Vect3f const & normal);
     Wall(Wall const & rhs);
     ~Wall();
 

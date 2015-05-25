@@ -7,7 +7,6 @@
 //
 
 #include "FluidBody.h"
-#include "Grid.h"
 
 FluidBody::FluidBody()
 {}
@@ -20,12 +19,12 @@ FluidBody::~FluidBody()
     _particles.clear();
 }
 
-std::list<Particle *> & FluidBody::getParticles()
+std::list<Particle *> & FluidBody::particles()
 {
     return _particles;
 }
 
-void FluidBody::addParticle(Particle  *particle)
+void FluidBody::addParticle(Particle *particle)
 {
     _particles.push_back(particle);
 }

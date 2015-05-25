@@ -11,12 +11,21 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <GLUT/GLUT.h>
 
 #include "Vect3f.h"
 
-class Particle
-{
-    Vect3f _position;
+#include <vector>
+
+class Particle {
+
+public:
+    Vect3f position;
+    Vect3f velocity;
+    Vect3f acceleration;
+    Vect3f normal;
+    float density;
+    float pressure;
 
 public:
     Particle(Vect3f const & position);
@@ -24,8 +33,6 @@ public:
     ~Particle();
 
     Particle & operator=(Particle const & rhs);
-
-    Vect3f & getPosition();
 };
 
 #endif /* defined(__sph_fluid__Particle__) */

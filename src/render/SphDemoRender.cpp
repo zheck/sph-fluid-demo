@@ -21,14 +21,11 @@ void SphDemoRender::init()
 {
 }
 
-void SphDemoRender::render()
+void SphDemoRender::render(FluidBody &fluidBody, Glass &glass)
 {
-    std::list<Particle *> particles = SphFluidDemo::instance()->fluidBody.getParticles();
-
-    glMatrixMode(GL_MODELVIEW);
-    for (std::list<Particle *>::iterator it = particles.begin(); it != particles.end(); ++it) {
+    for (std::list<Particle *>::iterator it = fluidBody.particles().begin(); it != fluidBody.particles().end(); ++it) {
         _particleRender.render(*it);
     }
+    _glassRender.render(glass);
     _debugRender.render();
-    _gridRender.render();
 }

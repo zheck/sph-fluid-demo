@@ -24,9 +24,8 @@ Camera::Camera(float angle, float distance, float fovy)
 Camera::~Camera()
 {}
 
-void Camera::init(Vect3f eye, Vect3f center, Vect3f up)
+void Camera::init(Vect3f center, Vect3f up)
 {
-    _eye = eye;
     _target = center;
     _upVector = up;
 
@@ -41,7 +40,7 @@ void Camera::setCamera()
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(_fovy, 800 / 600, 1.0f, 100.0f);
+    gluPerspective(_fovy, 800 / 600, 0.1f, 10.0f);
     gluLookAt(_eye.x, _eye.y, _eye.z,
               _target.x, _target.y, _target.z,
               _upVector.x, _upVector.y, _upVector.z);
@@ -49,8 +48,7 @@ void Camera::setCamera()
 
 void Camera::zoomIn()
 {
-    if (_distance > ZOOM_SCALE)
-        _distance -= ZOOM_SCALE;
+    _distance -= ZOOM_SCALE;
     setCamera();
 }
 
@@ -74,12 +72,17 @@ void Camera::verticalRotate(float angle)
     }
 }
 
-Vect3f Camera::getEye()
+float Camera::getAngle() const
+{
+    return _angle;
+}
+
+Vect3f Camera::getEye() const
 {
     return _eye;
 }
 
-Vect3f Camera::getTarget()
+Vect3f Camera::getTarget() const
 {
     return _target;
 }

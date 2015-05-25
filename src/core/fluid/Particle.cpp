@@ -5,19 +5,14 @@
 //  Created by zhou on 1/24/15.
 //  Copyright (c) 2015 zhou. All rights reserved.
 //
+#include <GLUT/GLUT.h>
 
 #include "Particle.h"
+#include "config.h"
 
-Particle::Particle(Vect3f const & pos) :
-_position(pos)
-{
-}
+Particle::Particle(const Vect3f& pos) :
+position(pos)
+{}
 
 Particle::~Particle()
-{
-}
-
-Vect3f & Particle::getPosition()
-{
-    return _position;
-}
+{}

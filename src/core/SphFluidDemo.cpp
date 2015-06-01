@@ -6,17 +6,21 @@
 //  Copyright (c) 2014 zhou. All rights reserved.
 //
 
+#include <unistd.h>
+
 #include "SphFluidDemo.h"
 #include "sph_formulas.h"
+#include "Timer.h"
 
 SphFluidDemo::SphFluidDemo() :
 camera(CAMERA_ANGLE, CAMERA_DISTANCE, 70),
-uniformGrid(Vect3f(0, 0, 0), Vect3f(GRID_SIZE, GRID_SIZE, GRID_SIZE))
+_uniformGrid(Vect3f(0, 0, 0), Vect3f(GRID_SIZE, GRID_SIZE, GRID_SIZE))
 {
-    glass = new Glass(Vect3f(0, 0, 0), Vect3f(GLASS_SIDE_SIZE, GLASS_SIDE_SIZE, GLASS_SIDE_SIZE));
-    camera.init(glass->center(), Vect3f(0, 1, 0));
+    _glass = new Glass(Vect3f(0, 0, 0), Vect3f(GLASS_SIDE_SIZE, GLASS_SIDE_SIZE, GLASS_SIDE_SIZE));
+    camera.init(_glass->center(), Vect3f(0, 1, 0));
     generateParticles();
-    uniformGrid.update();
+    _neighbors.resize(_numberOfParticle);
+    _uniformGrid.update();
 }
 
 SphFluidDemo::~SphFluidDemo()
@@ -24,17 +28,18 @@ SphFluidDemo::~SphFluidDemo()
 
 void SphFluidDemo::generateParticles()
 {
-    int numberOfParticle = 0;
-    for (float x = glass->origin().x; x < (glass->origin().x + glass->dimension().x); x += PARTICLE_RADIUS / 2) {
-        for (float z = glass->origin().z; z < uniformGrid.origin().z + glass->dimension().z; z += PARTICLE_RADIUS / 2) {
-            for (float y = glass->origin().y; y < uniformGrid.origin().y + glass->dimension().y; y += PARTICLE_RADIUS / 2) {
-                if (numberOfParticle > MAX_PARTICLE) {
+    _numberOfParticle = 0;
+
+    for (float x = _glass->origin().x; x < (_glass->origin().x + _glass->dimension().x); x += PARTICLE_RADIUS / 2) {
+        for (float z = _glass->origin().z; z < _uniformGrid.origin().z + _glass->dimension().z; z += PARTICLE_RADIUS / 2) {
+            for (float y = _glass->origin().y; y < _uniformGrid.origin().y + _glass->dimension().y; y += PARTICLE_RADIUS / 2) {
+                if (++_numberOfParticle >= MAX_PARTICLE) {
                     return;
                 }
                 Particle *p = new Particle(Vect3f(x, y, z));
-                uniformGrid(0, 0, 0).push_back(p);
-                fluidBody.addParticle(p);
-                ++numberOfParticle;
+                p->status = TO_UPDATE;
+                _uniformGrid(0, 0, 0).push_back(p);
+                _fluidBody.addParticle(p);
             }
         }
     }
@@ -42,11 +47,19 @@ void SphFluidDemo::generateParticles()
 
 void SphFluidDemo::update()
 {
+    static int i = 0;
+
+    ++i;
+    if (Timer::instance()->getElapsedTime("sph-fps") > 1000) {
+        Timer::instance()->update("sph-fps");
+        _currentFPS = i;
+        i = 0;
+    }
+
     step1();
     step2();
-
     float dt = 1.0 / 100.0;
-    for (std::list<Particle *>::iterator it = fluidBody.particles().begin(); it != fluidBody.particles().end(); ++it) {
+    for (std::list<Particle *>::iterator it = _fluidBody.particles().begin(); it != _fluidBody.particles().end(); ++it) {
         Vect3f newPosition = (*it)->position + (*it)->velocity * dt + (*it)->acceleration * dt * dt;
         Vect3f newVelocity = (newPosition - (*it)->position) / dt;
 
@@ -54,25 +67,25 @@ void SphFluidDemo::update()
         (*it)->velocity = newVelocity;
     }
 
-    uniformGrid.update();
+    _uniformGrid.update();
 }
 
 // Update density and pressure for each particle
 void SphFluidDemo::step1()
 {
-    for (std::list<Particle *>::iterator particle = fluidBody.particles().begin(); particle != fluidBody.particles().end(); ++particle) {
+    for (std::list<Particle *>::iterator particle = _fluidBody.particles().begin(); particle != _fluidBody.particles().end(); ++particle) {
         float kernels = 0.0;
+        int i = 0;
 
-        std::list<Particle *> * neighborParticles = uniformGrid.getNeighborParticles(**particle);
-        for (std::list<Particle *>::iterator it = neighborParticles->begin(); it != neighborParticles->end(); ++it) {
-            Vect3f diffPosition = (*particle)->position - (*it)->position;
+        _uniformGrid.getNeighborParticles(_neighbors, **particle);
+        while (_neighbors[i]) {
+            Vect3f diffPosition = (*particle)->position - _neighbors[i]->position;
             kernels += wpoly6Kernel(diffPosition.dot(diffPosition));
+            ++i;
         }
 
         (*particle)->density = kernels * PARTICLE_MASS;
         (*particle)->pressure = WATER_STIFFNESS * ((*particle)->density - PARTICLE_DENSITY_REST); //pressure = k(ρ − ρ0)
-        neighborParticles->clear();
-        delete neighborParticles;
     }
 }
 
@@ -80,40 +93,51 @@ void SphFluidDemo::step1()
 // Interpretation of given sph formulas, see docs
 void SphFluidDemo::step2()
 {
-    for (std::list<Particle *>::iterator particle = fluidBody.particles().begin(); particle != fluidBody.particles().end(); ++particle) {
+    for (std::list<Particle *>::iterator particle = _fluidBody.particles().begin(); particle != _fluidBody.particles().end(); ++particle) {
         Vect3f f_pressure, f_viscosity, f_surface, colorField;
         Vect3f f_gravity(0, GRAVITY * (*particle)->density, 0);
         float colorFieldLaplacian = 0.0;
+        int i = 0;
 
-        std::list<Particle *> * neighborParticles = uniformGrid.getNeighborParticles(**particle);
-        for (std::list<Particle *>::iterator it = neighborParticles->begin(); it != neighborParticles->end(); ++it) {
-            Vect3f distance = (*particle)->position - (*it)->position;
+        _uniformGrid.getNeighborParticles(_neighbors, **particle);
+        while (_neighbors[i]) {
+            Vect3f distance = (*particle)->position - _neighbors[i]->position;
             double dotRadius = distance.dot(distance);
 
             if (dotRadius <= PARTICLE_RADIUS_SQUARE) {
                 Vect3f poly6Gradient = wpoly6KernelGradient(dotRadius, distance);
                 Vect3f spikyGradient = spikyKernelGradient(dotRadius, distance);
-                if (*it != *particle) {
-                    f_pressure += noSymmetricalPressure((*particle)->pressure, (*particle)->density, (*it)->pressure, (*it)->density, spikyGradient);
-                    f_viscosity += noSymmetricalViscosity((*particle)->velocity, (*it)->velocity, (*it)->density, viscosityKernel(dotRadius));
+                if (_neighbors[i] != *particle) {
+                    f_pressure += noSymmetricalPressure((*particle)->pressure, (*particle)->density, _neighbors[i]->pressure, _neighbors[i]->density, spikyGradient);
+                    f_viscosity += noSymmetricalViscosity((*particle)->velocity, _neighbors[i]->velocity, _neighbors[i]->density, viscosityKernel(dotRadius));
                 }
-                colorField += poly6Gradient / (*it)->density * PARTICLE_MASS;
-                colorFieldLaplacian += wpoly6KernelSecond(dotRadius) / (*it)->density * PARTICLE_MASS;
+                colorField += poly6Gradient / _neighbors[i]->density * PARTICLE_MASS;
+                colorFieldLaplacian += wpoly6KernelSecond(dotRadius) / _neighbors[i]->density * PARTICLE_MASS;
             }
+            ++i;
         }
+
         (*particle)->normal = colorField * -1;
         float colorFieldNormalMagnitude = colorField.magnitude();
         if (colorFieldNormalMagnitude > SURFACE_THRESHOLD) {
             f_surface = -SURFACE_TENSION * colorField / colorFieldNormalMagnitude * colorFieldLaplacian;
         }
         (*particle)->acceleration = (f_pressure + f_viscosity + f_gravity) / (*particle)->density;
-        (*particle)->acceleration += glass->collision(**particle);
-        neighborParticles->clear();
-        delete neighborParticles;
+        (*particle)->acceleration += _glass->collision(**particle);
     }
 }
 
 void SphFluidDemo::draw()
 {
-    render.render(fluidBody, *glass);
+    render.render(_fluidBody, *_glass);
+}
+
+int SphFluidDemo::numberOfParticle() const
+{
+    return _numberOfParticle;
+}
+
+int SphFluidDemo::fps() const
+{
+    return _currentFPS;
 }

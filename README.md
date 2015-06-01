@@ -2,7 +2,7 @@
 I do not claim any of the formulas, I just tried to understand them and applied them
 
 # Description
-This is a simulation of water (1000 particles) in a cube-form glass, using smoothed-particle hydrodynamics method
+This is a tentative of a simulation of water (with 1000 particles) in a cube-form glass, using smoothed-particle hydrodynamics method
 
 # Video
 [![Everything Is AWESOME](https://i.ytimg.com/vi/0OyDIompChs/hqdefault.jpg)](https://youtu.be/0OyDIompChs "Sph fluid demo")
@@ -20,3 +20,4 @@ The demonstration is very poor so:
  - Be able to move the container
  - Use of shaders
  - Still need some optimization, quite slow for more than 5000 particles
+ - Etc.

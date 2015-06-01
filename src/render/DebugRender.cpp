@@ -34,11 +34,17 @@ void DebugRender::render()
     glRasterPos2i(10, 20);
     print("Eye position: " + SphFluidDemo::instance()->camera.getEye().getPosition());
 
-    glRasterPos2i(10, 30);
+    glRasterPos2i(10, 35);
     print("Angle: " + std::to_string(SphFluidDemo::instance()->camera.getAngle()));
 
-    glRasterPos2i(10, 40);
+    glRasterPos2i(10, 50);
     print("Target position: " + SphFluidDemo::instance()->camera.getTarget().getPosition());
+
+    glRasterPos2i(10, 65);
+    print("Number of particles: " + std::to_string(SphFluidDemo::instance()->numberOfParticle()));
+
+    glRasterPos2i(10, 80);
+    print("FPS: " + std::to_string(SphFluidDemo::instance()->fps()));
 
     glPopMatrix();
 }

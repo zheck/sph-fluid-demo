@@ -24,12 +24,16 @@
 
 class SphFluidDemo : public Singleton<SphFluidDemo>
 {
+    int _numberOfParticle;
+    FluidBody _fluidBody;
+    UniformGrid _uniformGrid;
+    Glass *_glass;
+    std::vector<Particle *> _neighbors; // a temporary array to be filled with neighbors of a particle
+    int _currentFPS;
+
 public:
     Camera camera;
     Keyboard keyboard;
-    FluidBody fluidBody;
-    Glass *glass;
-    UniformGrid uniformGrid;
     SphDemoRender render;
 
 public:
@@ -41,6 +45,9 @@ public:
 
     void update();
     void draw();
+
+    int fps() const;
+    int numberOfParticle() const;
 
 protected:
     void generateParticles();

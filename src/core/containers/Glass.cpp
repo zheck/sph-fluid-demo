@@ -19,6 +19,7 @@ _dimension(dimension)
     _walls.push_back(Wall(Vect3f(_origin.x, _center.y, _center.z), Vect3f(1, 0, 0))); // left
     _walls.push_back(Wall(Vect3f(_origin.x + dimension.x, _center.y, _center.z), Vect3f(-1, 0, 0))); // right
     _walls.push_back(Wall(Vect3f(_center.x, _origin.y, _center.z), Vect3f(0, 1, 0))); // bottom
+    _walls.push_back(Wall(Vect3f(_center.x, _origin.y + dimension.y, _center.z), Vect3f(0, -1, 0))); // top
 }
 
 Glass::~Glass()

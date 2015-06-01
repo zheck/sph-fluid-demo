@@ -14,6 +14,7 @@
 #include <GLUT/GLUT.h>
 
 #include "Vect3f.h"
+#include "config.h"
 
 #include <vector>
 
@@ -26,6 +27,7 @@ public:
     Vect3f normal;
     float density;
     float pressure;
+    eParticleStatus status;
 
 public:
     Particle(Vect3f const & position);

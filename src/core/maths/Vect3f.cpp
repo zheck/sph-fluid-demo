@@ -110,9 +110,7 @@ std::string Vect3f::getPosition() const
 
     ss1 << std::fixed << std::setprecision(2) << x;
     res += " x: " + ss1.str();
-    ss2 << std::fixed << std::setprecision(2) << y;
     res += " y: " + ss2.str();
-    ss3 << std::fixed << std::setprecision(2) << z;
     res += " z: " + ss3.str();
 
     return res;

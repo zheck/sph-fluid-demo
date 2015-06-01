@@ -29,15 +29,18 @@ public:
 
     UniformGrid & operator=(UniformGrid const & rhs);
     std::list<Particle *> & operator()(int x, int y, int z);
+    std::list<Particle *> & operator()(int position);
 
     Vect3f origin() const;
     Vect3f dimension() const;
     int numberOfCell() const;
     void update();
-    std::list<Particle *> * getNeighborParticles(Particle & particle);
+    int particleCellId(Vect3f & position) const;
+    void getNeighborParticles(std::vector<Particle *> & neighbors, Particle & particle);
 
 protected:
-    int newPosition(float value, int min, int max) const;
+    // return grid axe position for given value, return value is inside min and max range
+    int positionInsideGrid(float value, int min, int max) const;
 };
 
 #endif /* defined(__sph_fluid__UniformGrid__) */

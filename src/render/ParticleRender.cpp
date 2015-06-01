@@ -24,7 +24,7 @@ void ParticleRender::render(Particle * particle)
 
     glColor3f(0.12, 0.7, 1);
     glTranslatef(particle->position.x, particle->position.y, particle->position.z);
-    glutSolidSphere(PARTICLE_RENDER_RADIUS, 20, 20);
+    glutSolidSphere(PARTICLE_RENDER_RADIUS, 10, 10);
 
     glPopMatrix();
 }

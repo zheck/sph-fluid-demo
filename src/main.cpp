@@ -14,6 +14,7 @@
 
 #include "SphFluidDemo.h"
 #include "config.h"
+#include "Timer.h"
 
 bool play = false;
 
@@ -38,7 +39,8 @@ void display(void)
 
 void idleCallback()
 {
-    if (play == true) {
+    if (play == true && Timer::instance()->getElapsedTime("sph-update") > 1 / FPS) {
+        Timer::instance()->update("sph-update");
         SphFluidDemo::instance()->update();
     }
     display();

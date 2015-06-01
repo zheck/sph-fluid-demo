@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		482634651B19BBAE00FECD05 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 482634631B19BBAE00FECD05 /* Timer.cpp */; };
 		485F43181B0742BF009E70DE /* sph_formulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 485F43161B0742BF009E70DE /* sph_formulas.cpp */; };
 		487A89CC1A3302EE00B76BA9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487A89CB1A3302EE00B76BA9 /* OpenGL.framework */; };
 		488A4C761B0E7190009F6732 /* Glass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 488A4C741B0E7190009F6732 /* Glass.cpp */; };
@@ -40,6 +41,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		482634631B19BBAE00FECD05 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = src/core/utils/Timer.cpp; sourceTree = SOURCE_ROOT; };
+		482634641B19BBAE00FECD05 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = src/core/utils/Timer.h; sourceTree = SOURCE_ROOT; };
 		485F43161B0742BF009E70DE /* sph_formulas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_formulas.cpp; sourceTree = "<group>"; };
 		485F43171B0742BF009E70DE /* sph_formulas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sph_formulas.h; sourceTree = "<group>"; };
 		487A89CB1A3302EE00B76BA9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -200,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				48DBFFEF1B0E25D700AEF565 /* Singleton.h */,
+				482634631B19BBAE00FECD05 /* Timer.cpp */,
+				482634641B19BBAE00FECD05 /* Timer.h */,
 			);
 			name = utils;
 			path = ../utils;
@@ -272,6 +277,7 @@
 				4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */,
 				4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */,
 				4893AE641A86D47B0079DF2C /* Keyboard.cpp in Sources */,
+				482634651B19BBAE00FECD05 /* Timer.cpp in Sources */,
 				48DBFFFB1B0E25ED00AEF565 /* FluidBody.cpp in Sources */,
 				4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */,
 				48DB00001B0F2A9600AEF565 /* UniformGrid.cpp in Sources */,

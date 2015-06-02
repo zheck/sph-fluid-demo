@@ -13,13 +13,18 @@
 #include "Timer.h"
 
 SphFluidDemo::SphFluidDemo() :
+_tp(4),
 camera(CAMERA_ANGLE, CAMERA_DISTANCE, 70),
 _uniformGrid(Vect3f(0, 0, 0), Vect3f(GRID_SIZE, GRID_SIZE, GRID_SIZE))
 {
+    _tp.init();
     _glass = new Glass(Vect3f(0, 0, 0), Vect3f(GLASS_SIDE_SIZE, GLASS_SIDE_SIZE, GLASS_SIDE_SIZE));
     camera.init(_glass->center(), Vect3f(0, 1, 0));
     generateParticles();
     _neighbors.resize(_numberOfParticle);
+    _uniformGrid.update();
+    step1();
+    step2();
     _uniformGrid.update();
 }
 
@@ -55,7 +60,7 @@ void SphFluidDemo::update()
         _currentFPS = i;
         i = 0;
     }
-
+//    _tp.addTask(new Task(&executeStep, new std::string("step1")));
     step1();
     step2();
     float dt = 1.0 / 100.0;
@@ -140,4 +145,9 @@ int SphFluidDemo::numberOfParticle() const
 int SphFluidDemo::fps() const
 {
     return _currentFPS;
+}
+
+void executeStep(void *data)
+{
+    SphFluidDemo::instance()->step1();
 }

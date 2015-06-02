@@ -23,7 +23,7 @@ static const int FPS = 60;
 // The constants below and simulation values are based on 1 mole of H2O at perfect stats (20 C)
 // Using source: http://chemistry.about.com/od/moles/a/How-Much-Water-Is-A-Mole-Of-Water.htm
 
-static const int MAX_PARTICLE = 1000;
+static const int MAX_PARTICLE = 2000;
 static const float PARTICLE_DENSITY_REST = 999.97; // kg/m3
 static const float PARTICLE_VISCOSITY = 1.002;
 static const float PARTICLE_RADIUS = 0.045;

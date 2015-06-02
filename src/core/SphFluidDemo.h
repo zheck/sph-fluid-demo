@@ -21,6 +21,7 @@
 #include "Particle.h"
 #include "Glass.h"
 #include "SphDemoRender.h"
+#include "ThreadPool.hpp"
 
 class SphFluidDemo : public Singleton<SphFluidDemo>
 {
@@ -30,6 +31,7 @@ class SphFluidDemo : public Singleton<SphFluidDemo>
     Glass *_glass;
     std::vector<Particle *> _neighbors; // a temporary array to be filled with neighbors of a particle
     int _currentFPS;
+    ThreadPool _tp;
 
 public:
     Camera camera;
@@ -48,11 +50,14 @@ public:
 
     int fps() const;
     int numberOfParticle() const;
+    void step1();
+    void step2();
+    void step1Particle();
 
 protected:
     void generateParticles();
-    void step1();
-    void step2();
 };
+
+void executeStep(void *data);
 
 #endif /* defined(__sph_fluid__SphFluidDemo__) */

@@ -21,6 +21,11 @@
 		4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5D1A86D47B0079DF2C /* ParticleRender.cpp */; };
 		4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4893AE5F1A86D47B0079DF2C /* SphDemoRender.cpp */; };
 		489A61321A331897008FA731 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489A61311A331897008FA731 /* GLUT.framework */; };
+		48A239451B1E57E300EB3F8D /* CondVar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48A2393D1B1E57E300EB3F8D /* CondVar.cpp */; };
+		48A239461B1E57E300EB3F8D /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48A2393F1B1E57E300EB3F8D /* Mutex.cpp */; };
+		48A239471B1E57E300EB3F8D /* Task.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48A239411B1E57E300EB3F8D /* Task.cpp */; };
+		48A239481B1E57E300EB3F8D /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48A239431B1E57E300EB3F8D /* ThreadPool.cpp */; };
+		48A2394C1B1E57EF00EB3F8D /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48A2394A1B1E57EF00EB3F8D /* Exception.cpp */; };
 		48DB00001B0F2A9600AEF565 /* UniformGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48DBFFFE1B0F2A9600AEF565 /* UniformGrid.cpp */; };
 		48DBFFEB1B0E247000AEF565 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48DBFFEA1B0E247000AEF565 /* main.cpp */; };
 		48DBFFEE1B0E259A00AEF565 /* SphFluidDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48DBFFEC1B0E259A00AEF565 /* SphFluidDemo.cpp */; };
@@ -69,6 +74,16 @@
 		4893AE601A86D47B0079DF2C /* SphDemoRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphDemoRender.h; sourceTree = "<group>"; };
 		489A61311A331897008FA731 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		489FFAB21A6F0C2C001BEB53 /* sph-fluid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "sph-fluid"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48A2393D1B1E57E300EB3F8D /* CondVar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CondVar.cpp; sourceTree = "<group>"; };
+		48A2393E1B1E57E300EB3F8D /* CondVar.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CondVar.hpp; sourceTree = "<group>"; };
+		48A2393F1B1E57E300EB3F8D /* Mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mutex.cpp; sourceTree = "<group>"; };
+		48A239401B1E57E300EB3F8D /* Mutex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mutex.hpp; sourceTree = "<group>"; };
+		48A239411B1E57E300EB3F8D /* Task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Task.cpp; sourceTree = "<group>"; };
+		48A239421B1E57E300EB3F8D /* Task.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Task.hpp; sourceTree = "<group>"; };
+		48A239431B1E57E300EB3F8D /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
+		48A239441B1E57E300EB3F8D /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
+		48A2394A1B1E57EF00EB3F8D /* Exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Exception.cpp; sourceTree = "<group>"; };
+		48A2394B1B1E57EF00EB3F8D /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		48DBFFEA1B0E247000AEF565 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		48DBFFEC1B0E259A00AEF565 /* SphFluidDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphFluidDemo.cpp; sourceTree = "<group>"; };
 		48DBFFED1B0E259A00AEF565 /* SphFluidDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphFluidDemo.h; sourceTree = "<group>"; };
@@ -131,6 +146,8 @@
 		4893AE491A86D47B0079DF2C /* core */ = {
 			isa = PBXGroup;
 			children = (
+				48A239491B1E57EF00EB3F8D /* Exceptions */,
+				48A2393C1B1E57E300EB3F8D /* ThreadPool */,
 				48DBFFEC1B0E259A00AEF565 /* SphFluidDemo.cpp */,
 				48DBFFED1B0E259A00AEF565 /* SphFluidDemo.h */,
 				48DBFFE61B0E22C900AEF565 /* fluid */,
@@ -186,6 +203,30 @@
 				487A89CB1A3302EE00B76BA9 /* OpenGL.framework */,
 			);
 			name = frameworks;
+			sourceTree = "<group>";
+		};
+		48A2393C1B1E57E300EB3F8D /* ThreadPool */ = {
+			isa = PBXGroup;
+			children = (
+				48A2393D1B1E57E300EB3F8D /* CondVar.cpp */,
+				48A2393E1B1E57E300EB3F8D /* CondVar.hpp */,
+				48A2393F1B1E57E300EB3F8D /* Mutex.cpp */,
+				48A239401B1E57E300EB3F8D /* Mutex.hpp */,
+				48A239411B1E57E300EB3F8D /* Task.cpp */,
+				48A239421B1E57E300EB3F8D /* Task.hpp */,
+				48A239431B1E57E300EB3F8D /* ThreadPool.cpp */,
+				48A239441B1E57E300EB3F8D /* ThreadPool.hpp */,
+			);
+			path = ThreadPool;
+			sourceTree = "<group>";
+		};
+		48A239491B1E57EF00EB3F8D /* Exceptions */ = {
+			isa = PBXGroup;
+			children = (
+				48A2394A1B1E57EF00EB3F8D /* Exception.cpp */,
+				48A2394B1B1E57EF00EB3F8D /* Exception.h */,
+			);
+			path = Exceptions;
 			sourceTree = "<group>";
 		};
 		48DBFFE61B0E22C900AEF565 /* fluid */ = {
@@ -271,9 +312,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4893AE651A86D47B0079DF2C /* Mouse.cpp in Sources */,
+				48A2394C1B1E57EF00EB3F8D /* Exception.cpp in Sources */,
 				48DBFFFC1B0E25ED00AEF565 /* Particle.cpp in Sources */,
 				485F43181B0742BF009E70DE /* sph_formulas.cpp in Sources */,
 				48DBFFEE1B0E259A00AEF565 /* SphFluidDemo.cpp in Sources */,
+				48A239481B1E57E300EB3F8D /* ThreadPool.cpp in Sources */,
+				48A239471B1E57E300EB3F8D /* Task.cpp in Sources */,
 				4893AE6F1A86D47B0079DF2C /* SphDemoRender.cpp in Sources */,
 				4893AE6E1A86D47B0079DF2C /* ParticleRender.cpp in Sources */,
 				4893AE641A86D47B0079DF2C /* Keyboard.cpp in Sources */,
@@ -281,12 +325,14 @@
 				48DBFFFB1B0E25ED00AEF565 /* FluidBody.cpp in Sources */,
 				4893AE631A86D47B0079DF2C /* Camera.cpp in Sources */,
 				48DB00001B0F2A9600AEF565 /* UniformGrid.cpp in Sources */,
+				48A239461B1E57E300EB3F8D /* Mutex.cpp in Sources */,
 				48DBFFEB1B0E247000AEF565 /* main.cpp in Sources */,
 				4893AE6D1A86D47B0079DF2C /* GlassRender.cpp in Sources */,
 				4893AE691A86D47B0079DF2C /* Vect3f.cpp in Sources */,
 				4893AE671A86D47B0079DF2C /* Wall.cpp in Sources */,
 				488A4C761B0E7190009F6732 /* Glass.cpp in Sources */,
 				4893AE6C1A86D47B0079DF2C /* DebugRender.cpp in Sources */,
+				48A239451B1E57E300EB3F8D /* CondVar.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
